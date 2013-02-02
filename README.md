@@ -1,7 +1,8 @@
 # jquery-editable-select
 
 Transforms a select into an input field where single elements are shown in real-time according to the entered characters.
-It scales down to a basic real select list when javascript is not available.
+
+It scales down to a real select list when javascript is not available.
 
 # Example
 
@@ -148,6 +149,7 @@ You can navigate through list with keyboard arrows.
 ### enter
 
 When the list is visible, enter will select one option and replace the input with that text.
+
 When the list is not visible, enter will have normal behaviour (submitting the current form, etc...)
 
 ### tab

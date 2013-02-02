@@ -1,10 +1,8 @@
 # jquery-editable-select
 
-Trasform a select into an editable select replacing by an input text.
+Trasform a select into an editable select replacing it by an input text.
 
 # Example
-
-Attached to a field with the format specified via options:
 
 ```html
 <select id="editable-select">
@@ -46,6 +44,10 @@ the effect displayed when the list appears or disappears.
 * slide
 * fade
 
+```javascript
+$('#editable-select').editableSelect({ effects: 'slide' });
+```
+
 ### duration
 
 Integer or string.  Default: 'fast'
@@ -55,6 +57,10 @@ The duration of the appearance and disappearance of the list.
 * fast
 * slow
 * [0-9]+
+
+```javascript
+$('#editable-select').editableSelect({ duration: 200 });
+```
 
 ## Events
 
@@ -72,7 +78,7 @@ $('#editable-select').editableSelect({
 
 ### onShow
 
-Fired when the list is hidden.
+Fired when the list is shown.
 
 ```javascript
 $('#editable-select').editableSelect({
@@ -114,11 +120,15 @@ The datepicker includes some keyboard navigation:
 
 You can navigate through list with keyboard arrows.
 
-### escape
-
-The escape key hide the list.
-
 ### enter
 
 When the list is visible, enter will select one option and replace the input with that value.
 When the list is not visible, enter will have normal effects -- submitting the current form, etc.
+
+### escape
+
+The escape key hides the list.
+
+### tab
+
+The tab key hides the list.

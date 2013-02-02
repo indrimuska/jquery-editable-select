@@ -1,6 +1,7 @@
 # jquery-editable-select
 
-Trasform a select into an editable select replacing it by an input text.
+Transforms a select into an input field where single elements are shown in real-time according to the entered characters.
+It scales down to a basic real select list when javascript is not available.
 
 # Example
 
@@ -38,7 +39,7 @@ $('#editable-select').editableSelect();
 
 String.  Default: 'default'
 
-the effect displayed when the list appears or disappears.
+A string indicating which effect to use for the transition.
 
 * default
 * slide
@@ -52,7 +53,7 @@ $('#editable-select').editableSelect({ effects: 'slide' });
 
 Integer or string.  Default: 'fast'
 
-The duration of the appearance and disappearance of the list.
+A string or number determining how long the animation will run.
 
 * fast
 * slow
@@ -114,7 +115,7 @@ $('#editable-select').editableSelect({
 
 ## Keyboard support
 
-The datepicker includes some keyboard navigation:
+The jQuery Editable Select includes some keyboard navigation:
 
 ### up, down arrow keys
 
@@ -122,13 +123,13 @@ You can navigate through list with keyboard arrows.
 
 ### enter
 
-When the list is visible, enter will select one option and replace the input with that value.
-When the list is not visible, enter will have normal effects -- submitting the current form, etc.
-
-### escape
-
-The escape key hides the list.
+When the list is visible, enter will select one option and replace the input with that text.
+When the list is not visible, enter will have normal behaviour (submitting the current form, etc...)
 
 ### tab
 
 The tab key hides the list.
+
+### escape
+
+The escape key hides the list.

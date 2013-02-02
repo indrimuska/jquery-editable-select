@@ -33,6 +33,30 @@ It scales down to a basic real select list when javascript is not available.
 $('#editable-select').editableSelect();
 ```
 
+## Markup
+
+### Default text
+
+The default text showed right after the initialization.
+
+```html
+<select id="editable-select">
+	<option>Alfa Romeo</option>
+	<option selected>Audi</option>
+	<option>BMW</option>
+</select>
+```
+
+### Scroll support
+
+If the height of the list rises above 160px, a scrollbar is displayed.
+
+You can change the max-height of the list box by css:
+
+```css
+.es-list { max-height: 160px !important; }
+```
+
 ## Options
 
 ### effects

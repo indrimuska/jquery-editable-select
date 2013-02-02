@@ -15,7 +15,7 @@
 		}
 	});
 	$.fn.editableSelect = function (options) {
-		var defaults = { effect: 'default', duration: 'fast', onSelect: null };
+		var defaults = { effect: 'default', duration: 'fast', onCreate: null, onShow: null, onHide: null, onSelect: null };
 		var select = this.clone(), input = $('<input type="text">'), list = $('<ul class="es-list">');
 		options = $.extend({}, defaults, options);
 		switch (options.effects) {
@@ -46,6 +46,7 @@
 				});
 				es.initializeList();
 				es.initializeEvents();
+				if (options.onCreate) options.onCreate.call(this, input);
 			},
 			initializeList: function () {
 				var es = this;
@@ -101,6 +102,7 @@
 						case 'slide':  list.slideDown(options.duration); break;
 						default:       list.show(options.duration); break;
 					}
+				if (options.onShow) options.onShow.call(this, input);
 			},
 			hide: function () {
 				switch (options.effects) {
@@ -108,6 +110,7 @@
 					case 'slide':  list.slideUp(options.duration); break;
 					default:       list.hide(options.duration); break;
 				}
+				if (options.onHide) options.onHide.call(this, input);
 			},
 			copyAttributes: function (from, to) {
 				var attrs = $(from)[0].attributes;

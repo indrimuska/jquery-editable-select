@@ -1,5 +1,5 @@
 /**
- * jQuery Editable
+ * jQuery Editable Select
  * by Indri Muska <indrimuska@gmail.com>
  *
  * Version 1.0

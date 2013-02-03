@@ -3,6 +3,10 @@
 Transforms a select into an input field where single elements are shown in real-time according to the entered characters.
 It scales down to a real select list when javascript is not available.
 
+# Demo
+
+See demos [here](http://htmlpreview.github.com/?https://raw.github.com/indrimuska/jquery-editable-select/master/example/index.html).
+
 # Example
 
 ```html

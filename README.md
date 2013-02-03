@@ -5,7 +5,7 @@ It scales down to a real select list when javascript is not available.
 
 # Demo
 
-See demos [here](http://htmlpreview.github.com/?https://raw.github.com/indrimuska/jquery-editable-select/master/example/index.html).
+See demos [here](http://htmlpreview.github.com/?https://github.com/indrimuska/jquery-editable-select/blob/master/example/index.html).
 
 # Example
 

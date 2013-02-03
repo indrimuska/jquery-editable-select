@@ -38,7 +38,7 @@
 					li.text($(this).text());
 					es.copyAttributes(this, li);
 					list.append(li);
-					if ($(this).is(':selected')) es.setField(es);
+					if ($(this).attr('selected')) input.val($(this).text());
 				});
 				input.on('focus input click', es.show);
 				$(document).click(function (event) {
@@ -124,5 +124,6 @@
 			}
 		};
 		EditableSelect.init();
+		return input;
 	}
 }) (jQuery);

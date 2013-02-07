@@ -201,7 +201,7 @@ $('#fade').editableSelect({ effects: 'fade' });</pre>
 			<div class="span6">
 				<h4>Code</h4>
 				<pre>$('#onselect').editableSelect({
-	onSelect: function (input) {
+	onSelect: function (element, input) {
 		$('#afterSelect').html(input.val());
 	}
 });</pre>

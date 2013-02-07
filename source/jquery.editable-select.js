@@ -10,7 +10,7 @@
 
 (function ($) {
 	$.extend($.expr[':'], {
-		nicontains: function (elem, i, match, array) {
+		nic: function (elem, i, match, array) {
 			return !((elem.textContent || elem.innerText || "").toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0);
 		}
 	});
@@ -67,15 +67,19 @@
 					switch (event.keyCode) {
 						case 40: // Down
 							es.show();
-							var selected = list.find('.selected').size() > 0 ? list.find('.selected:visible').next(':visible') : list.find(':visible:first');
+							var visibles = list.find(':visible'), selected = visibles.filter('.selected');
 							list.find('.selected').removeClass('selected');
-							(selected.size() > 0 ? selected : list.find('li:visible:first')).addClass('selected');
+							selected = visibles.eq(selected.size() > 0 ? visibles.index(selected) + 1 : 0);
+							selected = (selected.size() > 0 ? selected : list.find('li:visible:first')).addClass('selected');
+							es.scroll(selected, true);
 							break;
 						case 38: // Up
 							es.show();
-							var selected = list.find('.selected').size() > 0 ? list.find('.selected:visible').prev(':visible') : list.find(':visible:last');
+							var visibles = list.find(':visible'), selected = visibles.filter('.selected');
 							list.find('.selected').removeClass('selected');
+							selected = visibles.eq(selected.size() > 0 ? visibles.index(selected) - 1 : -1);
 							(selected.size() > 0 ? selected : list.find('li:visible:last')).addClass('selected');
+							es.scroll(selected, false);
 							break;
 						case 13: // Enter
 							if (list.is(':visible')) {
@@ -94,7 +98,7 @@
 			},
 			show: function () {
 				list.find('li').show();
-				var hidden = list.find('li:nicontains(' + input.val() + ')').hide().size();
+				var hidden = list.find('li:nic(' + input.val() + ')').hide().size();
 				if (hidden == list.find('li').size()) list.hide();
 				else
 					switch (options.effects) {
@@ -111,6 +115,13 @@
 					default:       list.hide(options.duration); break;
 				}
 				if (options.onHide) options.onHide.call(this, input);
+			},
+			scroll: function (selected, up) {
+				var index = list.find(':visible').index(selected) + 1;
+				if (index * selected.outerHeight() >= list.scrollTop() + list.outerHeight() || (index - 1) * selected.outerHeight() <= list.scrollTop()) {
+					if (up) list.scrollTop(index * selected.outerHeight() - list.outerHeight());
+					else list.scrollTop((index - 1) * selected.outerHeight());
+				}
 			},
 			copyAttributes: function (from, to) {
 				var attrs = $(from)[0].attributes;

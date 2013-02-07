@@ -129,7 +129,7 @@
 				if (!$(this).is(':visible')) return false;
 				input.val($(this).text());
 				es.hide();
-				if (options.onSelect) options.onSelect(this, input);
+				if (options.onSelect) options.onSelect.call(input, $(this));
 			}
 		};
 		EditableSelect.init();

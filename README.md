@@ -135,7 +135,7 @@ Fired when an option of the list is selected.
 
 ```javascript
 $('#editable-select').editableSelect({
-	onSelect: function (element, input) {
+	onSelect: function (element) {
 		alert("Selected!");
 	}
 });

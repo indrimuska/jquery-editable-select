@@ -22,17 +22,14 @@
 			case 'default': case 'fade': case 'slide': break;
 			default: options.effects = 'default';
 		}
-		switch (options.duration) {
-			case !isNaN(options.duration): case 'fast': case 'slow': break;
-			default: options.duration = 'fast';
-		}
-		this.replaceWith($('<div class="es-container">').append(input));
+		if (isNaN(options.duration) && options.duration == 'fast' && options.duration == 'slow') options.duration = 'fast';
+		this.replaceWith(input);
 		var EditableSelect = {
 			init: function () {
 				var es = this;
 				es.copyAttributes(select, input);
-				input.after(list);
-				list.css({ top: input.position().top + input.outerHeight() - 1, left: input.position().left, width: input.innerWidth() });
+				input.addClass('es-input');
+				$(document.body).append(list);
 				select.find('option').each(function () {
 					var li = $('<li>');
 					li.text($(this).text());
@@ -98,6 +95,7 @@
 			},
 			show: function () {
 				list.find('li').show();
+				list.css({ top: input.offset().top + input.outerHeight() - 1, left: input.offset().left, width: input.innerWidth() });
 				var hidden = list.find('li:nic(' + input.val() + ')').hide().size();
 				if (hidden == list.find('li').size()) list.hide();
 				else
@@ -131,7 +129,7 @@
 				if (!$(this).is(':visible')) return false;
 				input.val($(this).text());
 				es.hide();
-				if (options.onSelect) options.onSelect.call(this, input);
+				if (options.onSelect) options.onSelect(this, input);
 			}
 		};
 		EditableSelect.init();

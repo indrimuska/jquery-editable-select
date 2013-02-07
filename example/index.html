@@ -230,7 +230,7 @@ $('#fade').editableSelect({ effects: 'fade' });</pre>
 				$('#slide').editableSelect({ effects: 'slide' });
 				$('#fade').editableSelect({ effects: 'fade' });
 				$('#onselect').editableSelect({
-					onSelect: function (input) {
+					onSelect: function (element, input) {
 						$('#afterSelect').html(input.val());
 					}
 				});

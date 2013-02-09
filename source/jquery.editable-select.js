@@ -115,10 +115,11 @@
 				if (options.onHide) options.onHide.call(this, input);
 			},
 			scroll: function (selected, up) {
-				var index = list.find(':visible').index(selected) + 1;
-				if (index * selected.outerHeight() >= list.scrollTop() + list.outerHeight() || (index - 1) * selected.outerHeight() <= list.scrollTop()) {
-					if (up) list.scrollTop(index * selected.outerHeight() - list.outerHeight());
-					else list.scrollTop((index - 1) * selected.outerHeight());
+				var height = 0, index = list.find(':visible').index(selected);
+				list.find(':visible').each(function (i, element) { if (i < index) height += $(element).outerHeight(); });
+				if (height + selected.outerHeight() >= list.scrollTop() + list.outerHeight() || height <= list.scrollTop()) {
+					if (up) list.scrollTop(height + selected.outerHeight() - list.outerHeight());
+					else list.scrollTop(height);
 				}
 			},
 			copyAttributes: function (from, to) {

@@ -2,7 +2,6 @@
  * jQuery Editable Select
  * by Indri Muska <indrimuska@gmail.com>
  *
- * Version 1.0
  * Source on GitHub @ https://github.com/indrimuska/jquery-editable-select
  *
  * File: jquery.editable-select.js
@@ -32,7 +31,7 @@
 				$(document.body).append(list);
 				select.find('option').each(function () {
 					var li = $('<li>');
-					li.text($(this).text());
+					li.html($(this).text());
 					es.copyAttributes(this, li);
 					list.append(li);
 					if ($(this).attr('selected')) input.val($(this).text());
@@ -64,7 +63,7 @@
 					switch (event.keyCode) {
 						case 40: // Down
 							es.show();
-							var visibles = list.find(':visible'), selected = visibles.filter('.selected');
+							var visibles = list.find('li:visible'), selected = visibles.filter('li.selected');
 							list.find('.selected').removeClass('selected');
 							selected = visibles.eq(selected.size() > 0 ? visibles.index(selected) + 1 : 0);
 							selected = (selected.size() > 0 ? selected : list.find('li:visible:first')).addClass('selected');
@@ -72,15 +71,15 @@
 							break;
 						case 38: // Up
 							es.show();
-							var visibles = list.find(':visible'), selected = visibles.filter('.selected');
-							list.find('.selected').removeClass('selected');
+							var visibles = list.find('li:visible'), selected = visibles.filter('li.selected');
+							list.find('li.selected').removeClass('selected');
 							selected = visibles.eq(selected.size() > 0 ? visibles.index(selected) - 1 : -1);
 							(selected.size() > 0 ? selected : list.find('li:visible:last')).addClass('selected');
 							es.scroll(selected, false);
 							break;
 						case 13: // Enter
 							if (list.is(':visible')) {
-								es.setField.call(list.find('.selected'), es);
+								es.setField.call(list.find('li.selected'), es);
 								event.preventDefault();
 							}
 						case 9:  // Tab
@@ -115,8 +114,8 @@
 				if (options.onHide) options.onHide.call(this, input);
 			},
 			scroll: function (selected, up) {
-				var height = 0, index = list.find(':visible').index(selected);
-				list.find(':visible').each(function (i, element) { if (i < index) height += $(element).outerHeight(); });
+				var height = 0, index = list.find('li:visible').index(selected);
+				list.find('li:visible').each(function (i, element) { if (i < index) height += $(element).outerHeight(); });
 				if (height + selected.outerHeight() >= list.scrollTop() + list.outerHeight() || height <= list.scrollTop()) {
 					if (up) list.scrollTop(height + selected.outerHeight() - list.outerHeight());
 					else list.scrollTop(height);
@@ -127,7 +126,7 @@
 				for (var i in attrs) $(to).attr(attrs[i].nodeName, attrs[i].nodeValue);
 			},
 			setField: function (es) {
-				if (!$(this).is(':visible')) return false;
+				if (!$(this).is('li:visible')) return false;
 				input.val($(this).text());
 				es.hide();
 				if (options.onSelect) options.onSelect.call(input, $(this));

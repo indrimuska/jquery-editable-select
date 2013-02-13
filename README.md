@@ -57,26 +57,26 @@ All HTML tags will be shown after the rendering of the list.
 
 ```html
 <select id="editable-select">
-	<option>Alfa Romeo - &lt;small&gt;&lt;a href="http://www.alfaromeo.com/" target="_blank" rel="nofollow"&gt;www.alfaromeo.com&lt;/a&gt;&lt;/small&gt;</option>
-	<option>Audi - &lt;small&gt;&lt;a href="http://www.audi.com/" target="_blank" rel="nofollow"&gt;www.audi.com&lt;/a&gt;&lt;/small&gt;</option>
-	<option>BMW - &lt;small&gt;&lt;a href="http://www.bmw.com/" target="_blank" rel="nofollow"&gt;www.bmw.com&lt;/a&gt;&lt;/small&gt;</option>
-	<option>Citroen - &lt;small&gt;&lt;a href="http://www.citroen.com/" target="_blank" rel="nofollow"&gt;www.citroen.com&lt;/a&gt;&lt;/small&gt;</option>
-	<option>Fiat - &lt;small&gt;&lt;a href="http://www.fiat.com/" target="_blank" rel="nofollow"&gt;www.fiat.com&lt;/a&gt;&lt;/small&gt;</option>
-	<option>Ford - &lt;small&gt;&lt;a href="http://www.ford.com/" target="_blank" rel="nofollow"&gt;www.ford.com&lt;/a&gt;&lt;/small&gt;</option>
-	<option>Jaguar - &lt;small&gt;&lt;a href="http://www.jaguar.com/" target="_blank" rel="nofollow"&gt;www.jaguar.com&lt;/a&gt;&lt;/small&gt;</option>
-	<option>Jeep - &lt;small&gt;&lt;a href="http://www.jeep.com/" target="_blank" rel="nofollow"&gt;www.jeep.com&lt;/a&gt;&lt;/small&gt;</option>
-	<option>Lancia - &lt;small&gt;&lt;a href="http://www.lancia.com/" target="_blank" rel="nofollow"&gt;www.lancia.com&lt;/a&gt;&lt;/small&gt;</option>
-	<option>Land Rover - &lt;small&gt;&lt;a href="http://www.landrover.com/" target="_blank" rel="nofollow"&gt;www.landrover.com&lt;/a&gt;&lt;/small&gt;</option>
-	<option>Mercedes - &lt;small&gt;&lt;a href="http://www.mercedes-benz.com/" target="_blank" rel="nofollow"&gt;www.mercedes-benz.com&lt;/a&gt;&lt;/small&gt;</option>
-	<option>Mini - &lt;small&gt;&lt;a href="http://www.mini.com/" target="_blank" rel="nofollow"&gt;www.mini.com&lt;/a&gt;&lt;/small&gt;</option>
-	<option>Nissan - &lt;small&gt;&lt;a href="http://www.nissan.it/" target="_blank" rel="nofollow"&gt;www.nissan.it&lt;/a&gt;&lt;/small&gt;</option>
-	<option>Opel - &lt;small&gt;&lt;a href="http://www.opel.com/" target="_blank" rel="nofollow"&gt;www.opel.com&lt;/a&gt;&lt;/small&gt;</option>
-	<option>Peugeot - &lt;small&gt;&lt;a href="http://www.peugeot.com/" target="_blank" rel="nofollow"&gt;www.peugeot.com&lt;/a&gt;&lt;/small&gt;</option>
-	<option>Porsche - &lt;small&gt;&lt;a href="http://www.porsche.com/" target="_blank" rel="nofollow"&gt;www.porsche.com&lt;/a&gt;&lt;/small&gt;</option>
-	<option>Renault - &lt;small&gt;&lt;a href="http://www.renault.com/" target="_blank" rel="nofollow"&gt;www.renault.com&lt;/a&gt;&lt;/small&gt;</option>
-	<option>Smart - &lt;small&gt;&lt;a href="http://www.smart.com/" target="_blank" rel="nofollow"&gt;www.smart.com&lt;/a&gt;&lt;/small&gt;</option>
-	<option>Volkswagen - &lt;small&gt;&lt;a href="http://volkswagen.com/" target="_blank" rel="nofollow"&gt;volkswagen.com&lt;/a&gt;&lt;/small&gt;</option>
-	<option>Volvo - &lt;small&gt;&lt;a href="http://www.volvo.com/" target="_blank" rel="nofollow"&gt;www.volvo.com&lt;/a&gt;&lt;/small&gt;</option>
+	<option>Alfa Romeo - &lt;small&gt;&lt;a href="http://www.alfaromeo.com/"&gt;www.alfaromeo.com&lt;/a&gt;&lt;/small&gt;</option>
+	<option>Audi - &lt;small&gt;&lt;a href="http://www.audi.com/"&gt;www.audi.com&lt;/a&gt;&lt;/small&gt;</option>
+	<option>BMW - &lt;small&gt;&lt;a href="http://www.bmw.com/"&gt;www.bmw.com&lt;/a&gt;&lt;/small&gt;</option>
+	<option>Citroen - &lt;small&gt;&lt;a href="http://www.citroen.com/"&gt;www.citroen.com&lt;/a&gt;&lt;/small&gt;</option>
+	<option>Fiat - &lt;small&gt;&lt;a href="http://www.fiat.com/"&gt;www.fiat.com&lt;/a&gt;&lt;/small&gt;</option>
+	<option>Ford - &lt;small&gt;&lt;a href="http://www.ford.com/"&gt;www.ford.com&lt;/a&gt;&lt;/small&gt;</option>
+	<option>Jaguar - &lt;small&gt;&lt;a href="http://www.jaguar.com/"&gt;www.jaguar.com&lt;/a&gt;&lt;/small&gt;</option>
+	<option>Jeep - &lt;small&gt;&lt;a href="http://www.jeep.com/"&gt;www.jeep.com&lt;/a&gt;&lt;/small&gt;</option>
+	<option>Lancia - &lt;small&gt;&lt;a href="http://www.lancia.com/"&gt;www.lancia.com&lt;/a&gt;&lt;/small&gt;</option>
+	<option>Land Rover - &lt;small&gt;&lt;a href="http://www.landrover.com/"&gt;www.landrover.com&lt;/a&gt;&lt;/small&gt;</option>
+	<option>Mercedes - &lt;small&gt;&lt;a href="http://www.mercedes-benz.com/"&gt;www.mercedes-benz.com&lt;/a&gt;&lt;/small&gt;</option>
+	<option>Mini - &lt;small&gt;&lt;a href="http://www.mini.com/"&gt;www.mini.com&lt;/a&gt;&lt;/small&gt;</option>
+	<option>Nissan - &lt;small&gt;&lt;a href="http://www.nissan.it/"&gt;www.nissan.it&lt;/a&gt;&lt;/small&gt;</option>
+	<option>Opel - &lt;small&gt;&lt;a href="http://www.opel.com/&gt;www.opel.com&lt;/a&gt;&lt;/small&gt;</option>
+	<option>Peugeot - &lt;small&gt;&lt;a href="http://www.peugeot.com/"&gt;www.peugeot.com&lt;/a&gt;&lt;/small&gt;</option>
+	<option>Porsche - &lt;small&gt;&lt;a href="http://www.porsche.com/"&gt;www.porsche.com&lt;/a&gt;&lt;/small&gt;</option>
+	<option>Renault - &lt;small&gt;&lt;a href="http://www.renault.com/"&gt;www.renault.com&lt;/a&gt;&lt;/small&gt;</option>
+	<option>Smart - &lt;small&gt;&lt;a href="http://www.smart.com/"&gt;www.smart.com&lt;/a&gt;&lt;/small&gt;</option>
+	<option>Volkswagen - &lt;small&gt;&lt;a href="http://volkswagen.com/"&gt;volkswagen.com&lt;/a&gt;&lt;/small&gt;</option>
+	<option>Volvo - &lt;small&gt;&lt;a href="http://www.volvo.com/"&gt;www.volvo.com&lt;/a&gt;&lt;/small&gt;</option>
 </select>
 ```
 

@@ -92,6 +92,16 @@ You can change the max-height of the list box by css:
 
 ## Options
 
+### filter
+
+Boolean.  Default: 'true'
+
+Filter or not items in list while typing.
+
+```javascript
+$('#editable-select').editableSelect({ filter: true });
+```
+
 ### effects
 
 String.  Default: 'default'
@@ -124,7 +134,7 @@ $('#editable-select').editableSelect({ duration: 200 });
 
 ### onCreate
 
-Fired when the input is intializated.
+Fired when the input is intialized.
 
 ```javascript
 $('#editable-select').editableSelect({
@@ -182,7 +192,7 @@ You can navigate through list with keyboard arrows.
 
 When the list is visible, enter will select one option and replace the input with that text.
 
-When the list is not visible, enter will have normal behaviour (submitting the current form, etc...)
+When the list is not visible, enter will have normal behavior (submitting the current form, etc...)
 
 ### tab
 

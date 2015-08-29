@@ -175,6 +175,43 @@ $('#fade').editableSelect({ effects: 'fade' });</pre>
 		<hr />
 		<div class="row-fluid">
 			<div class="span6">
+				<h3>No filter</h3>
+				<div class="row-fluid">
+					<div class="span4">Default</div>
+					<div class="span7">
+						<select id="filter">
+							<option>Alfa Romeo</option>
+							<option>Audi</option>
+							<option>BMW</option>
+							<option>Citroen</option>
+							<option>Fiat</option>
+							<option>Ford</option>
+							<option>Jaguar</option>
+							<option>Jeep</option>
+							<option>Lancia</option>
+							<option>Land Rover</option>
+							<option>Mercedes</option>
+							<option>Mini</option>
+							<option>Nissan</option>
+							<option>Opel</option>
+							<option>Peugeot</option>
+							<option>Porsche</option>
+							<option>Renault</option>
+							<option>Smart</option>
+							<option>Volkswagen</option>
+							<option>Volvo</option>
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="span6">
+				<h4>Code</h4>
+				<pre>$('#filter').editableSelect({ filter: false });</pre>
+			</div>
+		</div>
+		<hr />
+		<div class="row-fluid">
+			<div class="span6">
 				<h3>HTML support</h3>
 				<select id="html">
 					<option>Alfa Romeo - &lt;small&gt;&lt;a href="http://www.alfaromeo.com/" target="_blank" rel="nofollow"&gt;www.alfaromeo.com&lt;/a&gt;&lt;/small&gt;</option>
@@ -264,6 +301,7 @@ $('#fade').editableSelect({ effects: 'fade' });</pre>
 				$('#default').editableSelect({ effects: 'default' });
 				$('#slide').editableSelect({ effects: 'slide' });
 				$('#fade').editableSelect({ effects: 'fade' });
+				$('#filter').editableSelect({ filter: false });
 				$('#html').editableSelect();
 				$('#onselect').editableSelect({
 					onSelect: function (element) {

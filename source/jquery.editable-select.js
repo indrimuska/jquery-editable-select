@@ -14,7 +14,7 @@
 		}
 	});
 	$.fn.editableSelect = function (options) {
-		var defaults = { effect: 'default', duration: 'fast', onCreate: null, onShow: null, onHide: null, onSelect: null };
+		var defaults = { filter: true, effect: 'default', duration: 'fast', onCreate: null, onShow: null, onHide: null, onSelect: null };
 		var select = this.clone(), input = $('<input type="text">'), list = $('<ul class="es-list">');
 		options = $.extend({}, defaults, options);
 		switch (options.effects) {
@@ -95,7 +95,7 @@
 			show: function () {
 				list.find('li').show();
 				list.css({ top: input.offset().top + input.outerHeight() - 1, left: input.offset().left, width: input.innerWidth() });
-				var hidden = list.find('li:nic(' + input.val() + ')').hide().size();
+				var hidden = options.filter ? list.find('li:nic(' + input.val() + ')').hide().size() : 0;
 				if (hidden == list.find('li').size()) list.hide();
 				else
 					switch (options.effects) {

@@ -21,7 +21,7 @@
 			case 'default': case 'fade': case 'slide': break;
 			default: options.effects = 'default';
 		}
-		if (isNaN(options.duration) && options.duration == 'fast' && options.duration == 'slow') options.duration = 'fast';
+		if (isNaN(options.duration) || options.duration != 'fast' || options.duration != 'slow') options.duration = 'fast';
 		this.replaceWith(input);
 		var EditableSelect = {
 			init: function () {
@@ -30,14 +30,15 @@
 				input.addClass('es-input');
 				$(document.body).append(list);
 				select.find('option').each(function () {
-					var li = $('<li>');
-					li.html($(this).text());
+					var li = $('<li>'), option = $(this);
+					li.data('value', option.val());
+					li.html(option.text());
 					es.copyAttributes(this, li);
 					list.append(li);
-					if ($(this).attr('selected')) input.val($(this).text());
+					if ($(this).attr('selected')) input.val(option.text());
 				});
 				input.on('focus input click', es.show);
-				$(document).click(function (event) {
+				$(document).on('click', function (event) {
 					if (!$(event.target).is(input) && !$(event.target).is(list)) es.hide();
 				});
 				es.initializeList();
@@ -51,7 +52,7 @@
 						list.find('.selected').removeClass('selected');
 						$(this).addClass('selected');
 					});
-					$(this).click(function () { es.setField.call(this, es); });
+					$(this).on('click', function () { es.setField.call(this, es); });
 				});
 				list.mouseenter(function () {
 					list.find('li.selected').removeClass('selected');

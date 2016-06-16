@@ -201,3 +201,7 @@ The tab key hides the list.
 ### escape
 
 The escape key hides the list.
+
+# License
+
+Copyright (c) 2015 Indri Muska. Licensed under the MIT license.

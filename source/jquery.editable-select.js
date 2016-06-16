@@ -14,7 +14,7 @@
 		}
 	});
 	$.fn.editableSelect = function (options) {
-		var defaults = { filter: true, effect: 'default', duration: 'fast', onCreate: null, onShow: null, onHide: null, onSelect: null };
+		var defaults = { filter: true, effect: 'default', duration: 'fast', appendTo: 'body', onCreate: null, onShow: null, onHide: null, onSelect: null };
 		var select = this.clone(), input = $('<input type="text">'), list = $('<ul class="es-list">');
 		options = $.extend({}, defaults, options);
 		switch (options.effects) {
@@ -28,7 +28,7 @@
 				var es = this;
 				es.copyAttributes(select, input);
 				input.addClass('es-input');
-				$(document.body).append(list);
+				list.appendTo(options.appendTo);
 				select.find('option').each(function () {
 					var li = $('<li>'), option = $(this);
 					li.data('value', option.val());

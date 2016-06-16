@@ -130,6 +130,16 @@ A string or number determining how long the animation will run.
 $('#editable-select').editableSelect({ duration: 200 });
 ```
 
+### appendTo
+
+String or jQuery element.  Default: 'body'
+
+Where to append the dropdown list.
+
+```javascript
+$('#editable-select').editableSelect({ appendTo: 'body' });
+```
+
 ## Events
 
 ### onCreate

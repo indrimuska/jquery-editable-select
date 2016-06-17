@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<title>jQuery Editable Select Example</title>
 		<meta name="author" content="https://plus.google.com/u/0/+IndriMuska" />
-		<link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" />
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" />
 		<link href="https://rawgithub.com/indrimuska/jquery-editable-select/master/source/jquery.editable-select.min.css" rel="stylesheet" />
 		<style>
 		body { padding: 30px 60px; }
@@ -175,6 +175,64 @@ $('#fade').editableSelect({ effects: 'fade' });</pre>
 		<hr />
 		<div class="row-fluid">
 			<div class="span6">
+				<h3>Dialog</h3>
+				<a href="#dialog" class="btn btn-default" data-toggle="modal">
+					Open modal dialog
+				</a>
+				<div class="modal fade" id="dialog">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">
+									<span aria-hidden="true">&times;</span>
+								</button>
+								<h4 class="modal-title">Modal title</h4>
+							</div>
+							<div class="modal-body">
+								<div class="row-fluid">
+									<div class="span4">Default</div>
+									<div class="span7">
+										<select id="appendTo">
+											<option>Alfa Romeo</option>
+											<option>Audi</option>
+											<option>BMW</option>
+											<option>Citroen</option>
+											<option>Fiat</option>
+											<option>Ford</option>
+											<option>Jaguar</option>
+											<option>Jeep</option>
+											<option>Lancia</option>
+											<option>Land Rover</option>
+											<option>Mercedes</option>
+											<option>Mini</option>
+											<option>Nissan</option>
+											<option>Opel</option>
+											<option>Peugeot</option>
+											<option>Porsche</option>
+											<option>Renault</option>
+											<option>Smart</option>
+											<option>Volkswagen</option>
+											<option>Volvo</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+								<button type="button" class="btn btn-primary">Save changes</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="span6">
+				<h4>Code</h4>
+				<pre>$('#appendTo').editableSelect({ appendTo: '.modal-body' });</pre>
+			</div>
+		</div>
+		<hr />
+		<div class="row-fluid">
+			<div class="span6">
 				<h3>No filter</h3>
 				<div class="row-fluid">
 					<div class="span4">Default</div>
@@ -294,6 +352,7 @@ $('#fade').editableSelect({ effects: 'fade' });</pre>
 		</div>
 		
 		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 		<script src="https://rawgithub.com/indrimuska/jquery-editable-select/master/source/jquery.editable-select.js"></script>
 		<script>
 			window.onload = function () {
@@ -301,6 +360,7 @@ $('#fade').editableSelect({ effects: 'fade' });</pre>
 				$('#default').editableSelect({ effects: 'default' });
 				$('#slide').editableSelect({ effects: 'slide' });
 				$('#fade').editableSelect({ effects: 'fade' });
+				$('#appendTo').editableSelect({ appendTo: '.modal-body' });
 				$('#filter').editableSelect({ filter: false });
 				$('#html').editableSelect();
 				$('#onselect').editableSelect({

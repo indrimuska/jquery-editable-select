@@ -95,7 +95,7 @@
 			},
 			show: function () {
 				list.find('li').show();
-				list.css({ top: input.offset().top + input.outerHeight() - 1, left: input.offset().left, width: input.innerWidth() });
+				list.css({ top: input.position().top + input.outerHeight() - 1, left: input.position().left, width: input.outerWidth() });
 				var hidden = options.filter ? list.find('li:nic(' + input.val() + ')').hide().size() : 0;
 				if (hidden == list.find('li').size()) list.hide();
 				else

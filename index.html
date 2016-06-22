@@ -21,23 +21,22 @@
 		<!-- Stylesheets -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
 		<link rel="stylesheet" href="https:rawgithub.com/indrimuska/jquery-editable-select/master/dist/jquery-editable-select.min.css">
-		<style>
-		body { padding: 30px 60px; }
-		.sources { position: absolute; top: 65px; right: 80px; }
-		</style>
+		<link rel="stylesheet" href="style.css">
 	</head>
-	<body>
+	<body class="container">
 		
-		<h2>jQuery Editable Select</h2><hr />
-		<a href="https://github.com/indrimuska/jquery-editable-select" class="sources">Get sources</a>
+		<h2 class="page-header">
+			<a href="https://github.com/indrimuska/jquery-editable-select" class="pull-right small">Get sources</a>
+			jQuery Editable Select
+		</h2>
 		
-		<div class="row-fluid">
-			<div class="span6">
+		<div class="row">
+			<div class="col-md-6">
 				<h3>Basic example</h3>
-				<div class="row-fluid">
-					<div class="span4">It trasforms this</div>
-					<div class="span7">
-						<select>
+				<div class="row form-group">
+					<div class="col-md-4">It transforms this</div>
+					<div class="col-md-7">
+						<select class="form-control">
 							<option>Alfa Romeo</option>
 							<option>Audi</option>
 							<option>BMW</option>
@@ -61,10 +60,10 @@
 						</select>
 					</div>
 				</div>
-				<div class="row-fluid">
-					<div class="span4">Into this</div>
-					<div class="span7">
-						<select id="basic">
+				<div class="row form-group">
+					<div class="col-md-4">Into this</div>
+					<div class="col-md-7">
+						<select id="basic" class="form-control">
 							<option>Alfa Romeo</option>
 							<option>Audi</option>
 							<option>BMW</option>
@@ -89,19 +88,19 @@
 					</div>
 				</div>
 			</div>
-			<div class="span6">
-				<h4>Code</h4>
+			<div class="col-md-6">
+				<h3>Code</h3>
 				<pre>$('#basic').editableSelect();</pre>
 			</div>
 		</div>
 		<hr />
-		<div class="row-fluid">
-			<div class="span6">
+		<div class="row">
+			<div class="col-md-6">
 				<h3>Effects</h3>
-				<div class="row-fluid">
-					<div class="span4">Default</div>
-					<div class="span7">
-						<select id="default">
+				<div class="row form-group">
+					<div class="col-md-4">Default</div>
+					<div class="col-md-7">
+						<select id="default" class="form-control">
 							<option>Alfa Romeo</option>
 							<option>Audi</option>
 							<option>BMW</option>
@@ -125,10 +124,10 @@
 						</select>
 					</div>
 				</div>
-				<div class="row-fluid">
-					<div class="span4">Slide</div>
-					<div class="span7">
-						<select id="slide">
+				<div class="row form-group">
+					<div class="col-md-4">Slide</div>
+					<div class="col-md-7">
+						<select id="slide" class="form-control">
 							<option>Alfa Romeo</option>
 							<option>Audi</option>
 							<option>BMW</option>
@@ -152,10 +151,10 @@
 						</select>
 					</div>
 				</div>
-				<div class="row-fluid">
-					<div class="span4">Fade</div>
-					<div class="span7">
-						<select id="fade">
+				<div class="row form-group">
+					<div class="col-md-4">Fade</div>
+					<div class="col-md-7">
+						<select id="fade" class="form-control">
 							<option>Alfa Romeo</option>
 							<option>Audi</option>
 							<option>BMW</option>
@@ -180,16 +179,16 @@
 					</div>
 				</div>
 			</div>
-			<div class="span6">
-				<h4>Code</h4>
+			<div class="col-md-6">
+				<h3>Code</h3>
 				<pre>$('#default').editableSelect({ effects: 'default' });
 $('#slide').editableSelect({ effects: 'slide' });
 $('#fade').editableSelect({ effects: 'fade' });</pre>
 			</div>
 		</div>
 		<hr />
-		<div class="row-fluid">
-			<div class="span6">
+		<div class="row">
+			<div class="col-md-6">
 				<h3>Dialog</h3>
 				<a href="#dialog" class="btn btn-default" data-toggle="modal">
 					Open modal dialog
@@ -204,33 +203,28 @@ $('#fade').editableSelect({ effects: 'fade' });</pre>
 								<h4 class="modal-title">Modal title</h4>
 							</div>
 							<div class="modal-body">
-								<div class="row-fluid">
-									<div class="span4">Default</div>
-									<div class="span7">
-										<select id="appendTo">
-											<option>Alfa Romeo</option>
-											<option>Audi</option>
-											<option>BMW</option>
-											<option>Citroen</option>
-											<option>Fiat</option>
-											<option>Ford</option>
-											<option>Jaguar</option>
-											<option>Jeep</option>
-											<option>Lancia</option>
-											<option>Land Rover</option>
-											<option>Mercedes</option>
-											<option>Mini</option>
-											<option>Nissan</option>
-											<option>Opel</option>
-											<option>Peugeot</option>
-											<option>Porsche</option>
-											<option>Renault</option>
-											<option>Smart</option>
-											<option>Volkswagen</option>
-											<option>Volvo</option>
-										</select>
-									</div>
-								</div>
+								<select id="appendTo" class="form-control">
+									<option>Alfa Romeo</option>
+									<option>Audi</option>
+									<option>BMW</option>
+									<option>Citroen</option>
+									<option>Fiat</option>
+									<option>Ford</option>
+									<option>Jaguar</option>
+									<option>Jeep</option>
+									<option>Lancia</option>
+									<option>Land Rover</option>
+									<option>Mercedes</option>
+									<option>Mini</option>
+									<option>Nissan</option>
+									<option>Opel</option>
+									<option>Peugeot</option>
+									<option>Porsche</option>
+									<option>Renault</option>
+									<option>Smart</option>
+									<option>Volkswagen</option>
+									<option>Volvo</option>
+								</select>
 							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -240,53 +234,48 @@ $('#fade').editableSelect({ effects: 'fade' });</pre>
 					</div>
 				</div>
 			</div>
-			<div class="span6">
-				<h4>Code</h4>
+			<div class="col-md-6">
+				<h3>Code</h3>
 				<pre>$('#appendTo').editableSelect({ appendTo: '.modal-body' });</pre>
 			</div>
 		</div>
 		<hr />
-		<div class="row-fluid">
-			<div class="span6">
+		<div class="row">
+			<div class="col-md-6">
 				<h3>No filter</h3>
-				<div class="row-fluid">
-					<div class="span4">Default</div>
-					<div class="span7">
-						<select id="filter">
-							<option>Alfa Romeo</option>
-							<option>Audi</option>
-							<option>BMW</option>
-							<option>Citroen</option>
-							<option>Fiat</option>
-							<option>Ford</option>
-							<option>Jaguar</option>
-							<option>Jeep</option>
-							<option>Lancia</option>
-							<option>Land Rover</option>
-							<option>Mercedes</option>
-							<option>Mini</option>
-							<option>Nissan</option>
-							<option>Opel</option>
-							<option>Peugeot</option>
-							<option>Porsche</option>
-							<option>Renault</option>
-							<option>Smart</option>
-							<option>Volkswagen</option>
-							<option>Volvo</option>
-						</select>
-					</div>
-				</div>
+				<select id="filter" class="form-control">
+					<option>Alfa Romeo</option>
+					<option>Audi</option>
+					<option>BMW</option>
+					<option>Citroen</option>
+					<option>Fiat</option>
+					<option>Ford</option>
+					<option>Jaguar</option>
+					<option>Jeep</option>
+					<option>Lancia</option>
+					<option>Land Rover</option>
+					<option>Mercedes</option>
+					<option>Mini</option>
+					<option>Nissan</option>
+					<option>Opel</option>
+					<option>Peugeot</option>
+					<option>Porsche</option>
+					<option>Renault</option>
+					<option>Smart</option>
+					<option>Volkswagen</option>
+					<option>Volvo</option>
+				</select>
 			</div>
-			<div class="span6">
-				<h4>Code</h4>
+			<div class="col-md-6">
+				<h3>Code</h3>
 				<pre>$('#filter').editableSelect({ filter: false });</pre>
 			</div>
 		</div>
 		<hr />
-		<div class="row-fluid">
-			<div class="span6">
+		<div class="row">
+			<div class="col-md-6">
 				<h3>HTML support</h3>
-				<select id="html">
+				<select id="html" class="form-control">
 					<option>Alfa Romeo - &lt;small&gt;&lt;a href="http://www.alfaromeo.com/" target="_blank" rel="nofollow"&gt;www.alfaromeo.com&lt;/a&gt;&lt;/small&gt;</option>
 					<option>Audi - &lt;small&gt;&lt;a href="http://www.audi.com/" target="_blank" rel="nofollow"&gt;www.audi.com&lt;/a&gt;&lt;/small&gt;</option>
 					<option>BMW - &lt;small&gt;&lt;a href="http://www.bmw.com/" target="_blank" rel="nofollow"&gt;www.bmw.com&lt;/a&gt;&lt;/small&gt;</option>
@@ -309,42 +298,46 @@ $('#fade').editableSelect({ effects: 'fade' });</pre>
 					<option>Volvo - &lt;small&gt;&lt;a href="http://www.volvo.com/" target="_blank" rel="nofollow"&gt;www.volvo.com&lt;/a&gt;&lt;/small&gt;</option>
 				</select>
 			</div>
-			<div class="span6">
-				<h4>Code</h4>
+			<div class="col-md-6">
+				<h3>Code</h3>
 				<pre>$('#html').editableSelect();</pre>
 			</div>
 		</div>
 		<hr />
-		<div class="row-fluid">
-			<div class="span6">
+		<div class="row">
+			<div class="col-md-6">
 				<h3>onSelect</h3>
-				<select id="onselect">
-					<option>Alfa Romeo</option>
-					<option>Audi</option>
-					<option>BMW</option>
-					<option>Citroen</option>
-					<option>Fiat</option>
-					<option>Ford</option>
-					<option>Jaguar</option>
-					<option>Jeep</option>
-					<option>Lancia</option>
-					<option>Land Rover</option>
-					<option>Mercedes</option>
-					<option>Mini</option>
-					<option>Nissan</option>
-					<option>Opel</option>
-					<option>Peugeot</option>
-					<option>Porsche</option>
-					<option>Renault</option>
-					<option>Smart</option>
-					<option>Volkswagen</option>
-					<option>Volvo</option>
-				</select>
-				&nbsp; Selected: &nbsp;
-				<span id="afterSelect" class="text-success"></span>
+				<p>
+					<select id="onselect" class="form-control">
+						<option>Alfa Romeo</option>
+						<option>Audi</option>
+						<option>BMW</option>
+						<option>Citroen</option>
+						<option>Fiat</option>
+						<option>Ford</option>
+						<option>Jaguar</option>
+						<option>Jeep</option>
+						<option>Lancia</option>
+						<option>Land Rover</option>
+						<option>Mercedes</option>
+						<option>Mini</option>
+						<option>Nissan</option>
+						<option>Opel</option>
+						<option>Peugeot</option>
+						<option>Porsche</option>
+						<option>Renault</option>
+						<option>Smart</option>
+						<option>Volkswagen</option>
+						<option>Volvo</option>
+					</select>
+				</p>
+				<p>
+					Last selected:
+					<code id="afterSelect"></code>
+				</p>
 			</div>
-			<div class="span6">
-				<h4>Code</h4>
+			<div class="col-md-6">
+				<h3>Code</h3>
 				<pre>$('#onselect').editableSelect({
 	onSelect: function (element) {
 		$('#afterSelect').html($(this).val());
@@ -354,12 +347,12 @@ $('#fade').editableSelect({ effects: 'fade' });</pre>
 		</div>
 		<hr />
 		<h3>Author</h3>
-		<div class="row-fluid">
-			<div class="span6">
+		<div class="row">
+			<div class="col-md-6">
 				Indri Muska<br>
 				<a href="mailto:indrimuska@gmail.com">indrimuska@gmail.com</a>
 			</div>
-			<div class="span6">
+			<div class="col-md-6">
 				<iframe src="http://ghbtns.com/github-btn.html?user=indrimuska&repo=jquery-editable-select&type=fork&size=large" allowtransparency="true" frameborder="0" scrolling="0" width="100" height="30"></iframe>
 				<iframe src="http://ghbtns.com/github-btn.html?user=indrimuska&repo=jquery-editable-select&type=watch&size=large" allowtransparency="true" frameborder="0" scrolling="0" width="100" height="30"></iframe>
 				<iframe src="http://ghbtns.com/github-btn.html?user=indrimuska&repo=jquery-editable-select&type=follow&size=large" allowtransparency="true" frameborder="0" scrolling="0" width="210" height="30"></iframe>

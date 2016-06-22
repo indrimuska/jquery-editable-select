@@ -146,7 +146,7 @@ $('#editable-select').editableSelect({ duration: 200 });
 
 ### appendTo
 
-String or jQuery element.  Default: 'body'
+String or jQuery element. Default: `select.parent()`
 
 Where to append the dropdown list.
 

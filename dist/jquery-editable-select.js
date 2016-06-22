@@ -1,10 +1,8 @@
 /**
  * jQuery Editable Select
- * by Indri Muska <indrimuska@gmail.com>
+ * Indri Muska <indrimuska@gmail.com>
  *
  * Source on GitHub @ https://github.com/indrimuska/jquery-editable-select
- *
- * File: jquery.editable-select.js
  */
 
 (function ($) {

@@ -1,10 +1,8 @@
 /**
  * jQuery Editable Select
- * by Indri Muska <indrimuska@gmail.com>
+ * Indri Muska <indrimuska@gmail.com>
  *
  * Source on GitHub @ https://github.com/indrimuska/jquery-editable-select
- *
- * File: jquery.editable-select.css
  */
 
 input.es-input { padding-right: 20px !important; background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAICAYAAADJEc7MAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAG2YAABzjgAA4DIAAIM2AAB5CAAAxgwAADT6AAAgbL5TJ5gAAABGSURBVHjaYvz//z8DOYCJgUzA0tnZidPK8vJyRpw24pLEpwnuVHRFhDQxMDAwMPz//x+OOzo6/iPz8WFGuocqAAAA//8DAD/sORHYg7kaAAAAAElFTkSuQmCC) right center no-repeat; }

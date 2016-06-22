@@ -1,5 +1,9 @@
 # jQuery Editable Select
 
+[![NPM version](http://img.shields.io/npm/v/jquery-editable-select.svg?style=flat)](https://npmjs.org/package/jquery-editable-select)
+[![NPM downloads](http://img.shields.io/npm/dm/jquery-editable-select.svg?style=flat)](https://npmjs.org/package/jquery-editable-select)
+[![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](LICENSE)
+
 jQuery Editable Select is a jQuery plugin that transforms a select into an input field where single elements are shown in real-time according to the entered characters.
 It scales down to a real select list when javascript is not available.
 

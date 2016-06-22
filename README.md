@@ -3,11 +3,25 @@
 jQuery Editable Select is a jQuery plugin that transforms a select into an input field where single elements are shown in real-time according to the entered characters.
 It scales down to a real select list when javascript is not available.
 
+<p align="center">
+    <a href="http://indrimuska.github.io/jquery-editable-select/">
+        <img src="http://indrimuska.github.io/jquery-editable-select/img/jquery-editable-select.gif" alt="jQuery Editable Select demo">
+    </a>
+</p>
+
 # Demo
 
-See demos [here](http://htmlpreview.github.com/?https://github.com/indrimuska/jquery-editable-select/blob/master/example/index.html).
+See demos here: http://indrimuska.github.io/jquery-editable-select/
 
-# Example
+# Installation
+
+```html
+<script src="//code.jquery.com/jquery-1.12.4.min.js"></script>
+<script src="//rawgithub.com/indrimuska/jquery-editable-select/master/dist/jquery-editable-select.min.js"></script>
+<link href="//rawgithub.com/indrimuska/jquery-editable-select/master/dist/jquery-editable-select.min.css" rel="stylesheet">
+```
+
+# Usage
 
 ```html
 <select id="editable-select">

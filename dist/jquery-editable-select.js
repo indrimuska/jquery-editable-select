@@ -123,6 +123,7 @@
 			copyAttributes: function (from, to) {
 				var attrs = $(from)[0].attributes;
 				for (var i in attrs) $(to).attr(attrs[i].nodeName, attrs[i].nodeValue);
+				$(to).data($(from).data());
 			},
 			setField: function (es) {
 				if (!$(this).is('li:visible')) return false;

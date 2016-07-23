@@ -19,13 +19,25 @@ See demos here: http://indrimuska.github.io/jquery-editable-select/
 
 # Installation
 
+Get jQuery Editable Select from [**npm**](https://www.npmjs.com/), [**bower**](http://bower.io/) or [**git**](https://git-scm.com/):
+
+```
+  npm install jquery-editable-select
+bower install jquery-editable-select
+  git clone   https://github.com/indrimuska/jquery-editable-select.git
+```
+
+Include style and script in your page:
+
 ```html
 <script src="//code.jquery.com/jquery-1.12.4.min.js"></script>
 <script src="//rawgithub.com/indrimuska/jquery-editable-select/master/dist/jquery-editable-select.min.js"></script>
 <link href="//rawgithub.com/indrimuska/jquery-editable-select/master/dist/jquery-editable-select.min.css" rel="stylesheet">
 ```
 
-# Usage
+# Markup
+
+## Basic usage
 
 ```html
 <select id="editable-select">
@@ -55,9 +67,7 @@ See demos here: http://indrimuska.github.io/jquery-editable-select/
 $('#editable-select').editableSelect();
 ```
 
-## Markup
-
-### Default text
+## Default text
 
 The default text showed right after the initialization.
 
@@ -69,9 +79,9 @@ The default text showed right after the initialization.
 </select>
 ```
 
-### HTML support
+## HTML support
 
-All HTML tags will be shown after the rendering of the list.
+All HTML tags in each `<option>` element will be rendered after initialization.
 
 ```html
 <select id="editable-select">
@@ -87,7 +97,7 @@ All HTML tags will be shown after the rendering of the list.
 	<option>Land Rover - &lt;small&gt;&lt;a href="http://www.landrover.com/"&gt;www.landrover.com&lt;/a&gt;&lt;/small&gt;</option>
 	<option>Mercedes - &lt;small&gt;&lt;a href="http://www.mercedes-benz.com/"&gt;www.mercedes-benz.com&lt;/a&gt;&lt;/small&gt;</option>
 	<option>Mini - &lt;small&gt;&lt;a href="http://www.mini.com/"&gt;www.mini.com&lt;/a&gt;&lt;/small&gt;</option>
-	<option>Nissan - &lt;small&gt;&lt;a href="http://www.nissan.it/"&gt;www.nissan.it&lt;/a&gt;&lt;/small&gt;</option>
+	<option>Nissan - &lt;small&gt;&lt;a href="http://www.nissan-global.com/"&gt;http://www.nissan-global.com/&lt;/a&gt;&lt;/small&gt;</option>
 	<option>Opel - &lt;small&gt;&lt;a href="http://www.opel.com/&gt;www.opel.com&lt;/a&gt;&lt;/small&gt;</option>
 	<option>Peugeot - &lt;small&gt;&lt;a href="http://www.peugeot.com/"&gt;www.peugeot.com&lt;/a&gt;&lt;/small&gt;</option>
 	<option>Porsche - &lt;small&gt;&lt;a href="http://www.porsche.com/"&gt;www.porsche.com&lt;/a&gt;&lt;/small&gt;</option>
@@ -102,7 +112,7 @@ All HTML tags will be shown after the rendering of the list.
 
 If the height of the list rises above 160px, a scrollbar is displayed.
 
-You can change the max-height of the list box by css:
+You can change the max-height of the list box by overriding this css rule:
 
 ```css
 .es-list { max-height: 160px !important; }
@@ -110,95 +120,29 @@ You can change the max-height of the list box by css:
 
 ## Options
 
-### filter
-
-Boolean.  Default: 'true'
-
-Filter or not items in list while typing.
-
-```javascript
-$('#editable-select').editableSelect({ filter: true });
-```
-
-### effects
-
-String.  Default: 'default'
-
-A string indicating which effect to use for the transition.
-
-* default
-* slide
-* fade
+Property | Type | Default | Description
+---|:---:|:---:|---
+filter | Boolean | `true` | Filter (or not) items in list while typing.
+effects | Enum: `"default"`, `"slide"`, `"fade"` | `"default"` | Easing used for showing and hiding the dropdown list.
+duration | Integer or Enum: `"fast"`, `"slow"` | `"fast"` | Duration of the easings (in milliseconds).
+appendTo | String or jQuery element | `select.parent()` | Where to append the dropdown list in the DOM.
 
 ```javascript
-$('#editable-select').editableSelect({ effects: 'slide' });
-```
-
-### duration
-
-Integer or string.  Default: 'fast'
-
-A string or number determining how long the animation will run.
-
-* fast
-* slow
-* [0-9]+
-
-```javascript
-$('#editable-select').editableSelect({ duration: 200 });
-```
-
-### appendTo
-
-String or jQuery element. Default: `select.parent()`
-
-Where to append the dropdown list.
-
-```javascript
-$('#editable-select').editableSelect({ appendTo: 'body' });
+$('#editable-select').editableSelect({
+	effects: 'slide',
+	duration: 200,
+	appendTo: 'body'
+});
 ```
 
 ## Events
 
-### onCreate
-
-Fired when the input is intialized.
-
-```javascript
-$('#editable-select').editableSelect({
-	onCreate: function () {
-		alert("Initialized!");
-	}
-});
-```
-
-### onShow
-
-Fired when the list is shown.
-
-```javascript
-$('#editable-select').editableSelect({
-	onShow: function () {
-		alert("Visible!");
-	}
-});
-```
-
-### onHide
-
-Fired when the list is hidden.
-
-```javascript
-$('#editable-select').editableSelect({
-	onHide: function () {
-		alert("Hidden!");
-	}
-});
-```
-
-### onSelect
-
-Fired when an option of the list is selected.
+Event | Parameters | Description
+---|:---:|---
+onCreate | | Fired after input initialization.
+onShow | | Fired when the list is shown.
+onHide | | Fired when the list is hidden.
+onSelect | `element` | Fired when an option of the list is selected.
 
 ```javascript
 $('#editable-select').editableSelect({
@@ -210,25 +154,20 @@ $('#editable-select').editableSelect({
 
 ## Keyboard support
 
-The jQuery Editable Select includes some keyboard navigation:
+jQuery Editable Select includes support for keyboard navigation:
 
-### up, down arrow keys
+-	<kbd>up</kbd>, <kbd>down</kbd> arrow keys<br>
+	You can navigate through list with keyboard arrows.
 
-You can navigate through list with keyboard arrows.
+-	<kbd>Enter</kbd><br>
+	When the list is visible, by pressing <kbd>Enter</kbd> button you'll select the highlighted option and replace the input field value with the option label.<br>
+	When the list is not visible, <kbd>Enter</kbd> will have a normal behavior (submitting the form, etc...)
 
-### enter
+-	<kbd>Tab</kbd><br>
+	If the dropdown list is visible, it closes the dropdown, otherwise it will be opened.
 
-When the list is visible, enter will select one option and replace the input with that text.
-
-When the list is not visible, enter will have normal behavior (submitting the current form, etc...)
-
-### tab
-
-The tab key hides the list.
-
-### escape
-
-The escape key hides the list.
+-	<kbd>Escape</kbd><br>
+	Hides the list.
 
 # License
 

@@ -45,22 +45,6 @@ Include style and script in your page:
 	<option>Audi</option>
 	<option>BMW</option>
 	<option>Citroen</option>
-	<option>Fiat</option>
-	<option>Ford</option>
-	<option>Jaguar</option>
-	<option>Jeep</option>
-	<option>Lancia</option>
-	<option>Land Rover</option>
-	<option>Mercedes</option>
-	<option>Mini</option>
-	<option>Nissan</option>
-	<option>Opel</option>
-	<option>Peugeot</option>
-	<option>Porsche</option>
-	<option>Renault</option>
-	<option>Smart</option>
-	<option>Volkswagen</option>
-	<option>Volvo</option>
 </select>
 ```
 ```javascript
@@ -76,6 +60,7 @@ The default text showed right after the initialization.
 	<option>Alfa Romeo</option>
 	<option selected>Audi</option>
 	<option>BMW</option>
+	<option>Citroen</option>
 </select>
 ```
 
@@ -89,22 +74,6 @@ All HTML tags in each `<option>` element will be rendered after initialization.
 	<option>Audi - &lt;small&gt;&lt;a href="http://www.audi.com/"&gt;www.audi.com&lt;/a&gt;&lt;/small&gt;</option>
 	<option>BMW - &lt;small&gt;&lt;a href="http://www.bmw.com/"&gt;www.bmw.com&lt;/a&gt;&lt;/small&gt;</option>
 	<option>Citroen - &lt;small&gt;&lt;a href="http://www.citroen.com/"&gt;www.citroen.com&lt;/a&gt;&lt;/small&gt;</option>
-	<option>Fiat - &lt;small&gt;&lt;a href="http://www.fiat.com/"&gt;www.fiat.com&lt;/a&gt;&lt;/small&gt;</option>
-	<option>Ford - &lt;small&gt;&lt;a href="http://www.ford.com/"&gt;www.ford.com&lt;/a&gt;&lt;/small&gt;</option>
-	<option>Jaguar - &lt;small&gt;&lt;a href="http://www.jaguar.com/"&gt;www.jaguar.com&lt;/a&gt;&lt;/small&gt;</option>
-	<option>Jeep - &lt;small&gt;&lt;a href="http://www.jeep.com/"&gt;www.jeep.com&lt;/a&gt;&lt;/small&gt;</option>
-	<option>Lancia - &lt;small&gt;&lt;a href="http://www.lancia.com/"&gt;www.lancia.com&lt;/a&gt;&lt;/small&gt;</option>
-	<option>Land Rover - &lt;small&gt;&lt;a href="http://www.landrover.com/"&gt;www.landrover.com&lt;/a&gt;&lt;/small&gt;</option>
-	<option>Mercedes - &lt;small&gt;&lt;a href="http://www.mercedes-benz.com/"&gt;www.mercedes-benz.com&lt;/a&gt;&lt;/small&gt;</option>
-	<option>Mini - &lt;small&gt;&lt;a href="http://www.mini.com/"&gt;www.mini.com&lt;/a&gt;&lt;/small&gt;</option>
-	<option>Nissan - &lt;small&gt;&lt;a href="http://www.nissan-global.com/"&gt;http://www.nissan-global.com/&lt;/a&gt;&lt;/small&gt;</option>
-	<option>Opel - &lt;small&gt;&lt;a href="http://www.opel.com/&gt;www.opel.com&lt;/a&gt;&lt;/small&gt;</option>
-	<option>Peugeot - &lt;small&gt;&lt;a href="http://www.peugeot.com/"&gt;www.peugeot.com&lt;/a&gt;&lt;/small&gt;</option>
-	<option>Porsche - &lt;small&gt;&lt;a href="http://www.porsche.com/"&gt;www.porsche.com&lt;/a&gt;&lt;/small&gt;</option>
-	<option>Renault - &lt;small&gt;&lt;a href="http://www.renault.com/"&gt;www.renault.com&lt;/a&gt;&lt;/small&gt;</option>
-	<option>Smart - &lt;small&gt;&lt;a href="http://www.smart.com/"&gt;www.smart.com&lt;/a&gt;&lt;/small&gt;</option>
-	<option>Volkswagen - &lt;small&gt;&lt;a href="http://volkswagen.com/"&gt;volkswagen.com&lt;/a&gt;&lt;/small&gt;</option>
-	<option>Volvo - &lt;small&gt;&lt;a href="http://www.volvo.com/"&gt;www.volvo.com&lt;/a&gt;&lt;/small&gt;</option>
 </select>
 ```
 
@@ -119,6 +88,8 @@ You can change the max-height of the list box by overriding this css rule:
 ```
 
 ## Options
+
+Options can be passed via data attributes or JavaScript. For data attributes, append the option name to `data-`, as in `data-filter="true"`.
 
 Property | Type | Default | Description
 ---|:---:|:---:|---
@@ -135,20 +106,53 @@ $('#editable-select').editableSelect({
 });
 ```
 
+### Default settings
+
+You can change the default settings for a plugin by modifying the plugin's `Constructor.DEFAULTS` object:
+
+```javascript
+$.fn.editableSelect.Constructor.DEFAULTS.effects = 'slide';
+// changes default for the plugin's `effects` option to `slide`
+```
+
+## Methods
+
+### `.editableSelect(options);`
+
+Transforms the `<select>` into and jQuery Editable Select. Accepts an optional options `object`.
+
+### `.editableSelect('show');`
+
+Manually shows the dropdown list.
+
+### `.editableSelect('hide');`
+
+Manually hides the dropdown list.
+
+### `.editableSelect('filter');`
+
+Manually filters the dropdown list according to the value of the text field.
+
+### `.editableSelect('select', $element);`
+
+Manually sets the value of the text field to the value of the `$element` passed as parameter (it must be one of the elements in the dropdown list).
+
+### `.editableSelect('add', text [, index [, attrs [, data ]]] );`
+
+Adds a new option in the dropdown list. You can choose the position where to insert the element (starting from `0`) and any attributes (or data-attributes) to be assigned.
+
 ## Events
 
 Event | Parameters | Description
 ---|:---:|---
-onCreate | | Fired after input initialization.
-onShow | | Fired when the list is shown.
-onHide | | Fired when the list is hidden.
-onSelect | `element` | Fired when an option of the list is selected.
+create.editable-select | | Fired after input initialization.
+show.editable-select | | Fired when the list is shown.
+hide.editable-select | | Fired when the list is hidden.
+select.editable-select | `$element` | Fired when an option of the list is selected.
 
 ```javascript
-$('#editable-select').editableSelect({
-	onSelect: function (element) {
-		alert("Selected!");
-	}
+$('#editable-select').on('show.editable-select', function (e) {
+	// do something...
 });
 ```
 
@@ -171,4 +175,4 @@ jQuery Editable Select includes support for keyboard navigation:
 
 # License
 
-Copyright (c) 2015 Indri Muska. Licensed under the MIT license.
+Copyright (c) 2016 Indri Muska. Licensed under the MIT license.

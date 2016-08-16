@@ -5,134 +5,192 @@
  * Source on GitHub @ https://github.com/indrimuska/jquery-editable-select
  */
 
-(function ($) {
-	$.extend($.expr[':'], {
-		nic: function (elem, i, match, array) {
-			return !((elem.textContent || elem.innerText || "").toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0);
-		}
-	});
-	$.fn.editableSelect = function (options) {
-		var defaults = { filter: true, effect: 'default', duration: 'fast', onCreate: null, onShow: null, onHide: null, onSelect: null };
-		var select = this.clone(), input = $('<input type="text">'), list = $('<ul class="es-list">');
-		options = $.extend({}, defaults, options);
-		switch (options.effects) {
-			case 'default': case 'fade': case 'slide': break;
-			default: options.effects = 'default';
-		}
-		if (isNaN(options.duration) || options.duration != 'fast' || options.duration != 'slow') options.duration = 'fast';
-		this.replaceWith(input);
-		var EditableSelect = {
-			init: function () {
-				var es = this;
-				es.copyAttributes(select, input);
-				input.addClass('es-input');
-				list.appendTo(options.appendTo || input.parent());
-				select.find('option').each(function () {
-					var li = $('<li>'), option = $(this);
-					li.data('value', option.val());
-					li.html(option.text());
-					es.copyAttributes(this, li);
-					list.append(li);
-					if ($(this).attr('selected')) input.val(option.text());
-				});
-				input.on('focus input click', es.show);
-				$(document).on('click', function (event) {
-					if (!$(event.target).is(input) && !$(event.target).is(list)) es.hide();
-				});
-				es.initializeList();
-				es.initializeEvents();
-				if (options.onCreate) options.onCreate.call(this, input);
-			},
-			initializeList: function () {
-				var es = this;
-				list.find('li').each(function () {
-					$(this).on('mousemove', function () {
-						list.find('.selected').removeClass('selected');
-						$(this).addClass('selected');
-					});
-					$(this).on('click', function () { es.setField.call(this, es); });
-				});
-				list.mouseenter(function () {
-					list.find('li.selected').removeClass('selected');
-				});
-			},
-			initializeEvents: function () {
-				var es = this;
-				input.bind('input keydown', function (event) {
-					switch (event.keyCode) {
-						case 40: // Down
-							es.show();
-							var visibles = list.find('li:visible'), selected = visibles.filter('li.selected');
-							list.find('.selected').removeClass('selected');
-							selected = visibles.eq(selected.size() > 0 ? visibles.index(selected) + 1 : 0);
-							selected = (selected.size() > 0 ? selected : list.find('li:visible:first')).addClass('selected');
-							es.scroll(selected, true);
-							break;
-						case 38: // Up
-							es.show();
-							var visibles = list.find('li:visible'), selected = visibles.filter('li.selected');
-							list.find('li.selected').removeClass('selected');
-							selected = visibles.eq(selected.size() > 0 ? visibles.index(selected) - 1 : -1);
-							(selected.size() > 0 ? selected : list.find('li:visible:last')).addClass('selected');
-							es.scroll(selected, false);
-							break;
-						case 13: // Enter
-							if (list.is(':visible')) {
-								es.setField.call(list.find('li.selected'), es);
-								event.preventDefault();
-							}
-						case 9:  // Tab
-						case 27: // Esc
-							es.hide();
-							break;
-						default:
-							es.show();
-							break;
-					}
-				});
-			},
-			show: function () {
-				list.find('li').show();
-				list.css({ top: input.position().top + input.outerHeight() - 1, left: input.position().left, width: input.outerWidth() });
-				var hidden = options.filter ? list.find('li:nic(' + input.val() + ')').hide().size() : 0;
-				if (hidden == list.find('li').size()) list.hide();
-				else
-					switch (options.effects) {
-						case 'fade':   list.fadeIn(options.duration); break;
-						case 'slide':  list.slideDown(options.duration); break;
-						default:       list.show(options.duration); break;
-					}
-				if (options.onShow) options.onShow.call(this, input);
-			},
-			hide: function () {
-				switch (options.effects) {
-					case 'fade':   list.fadeOut(options.duration); break;
-					case 'slide':  list.slideUp(options.duration); break;
-					default:       list.hide(options.duration); break;
-				}
-				if (options.onHide) options.onHide.call(this, input);
-			},
-			scroll: function (selected, up) {
-				var height = 0, index = list.find('li:visible').index(selected);
-				list.find('li:visible').each(function (i, element) { if (i < index) height += $(element).outerHeight(); });
-				if (height + selected.outerHeight() >= list.scrollTop() + list.outerHeight() || height <= list.scrollTop()) {
-					if (up) list.scrollTop(height + selected.outerHeight() - list.outerHeight());
-					else list.scrollTop(height);
-				}
-			},
-			copyAttributes: function (from, to) {
-				var attrs = $(from)[0].attributes;
-				for (var i in attrs) $(to).attr(attrs[i].nodeName, attrs[i].nodeValue);
-				$(to).data($(from).data());
-			},
-			setField: function (es) {
-				if (!$(this).is('li:visible')) return false;
-				input.val($(this).text());
-				es.hide();
-				if (options.onSelect) options.onSelect.call(input, $(this));
-			}
-		};
-		EditableSelect.init();
-		return input;
++(function ($) {
+	// jQuery Editable Select
+	EditableSelect = function (select, options) {
+		var that     = this;
+		
+		this.options = options;
+		this.$select = $(select);
+		this.$input  = $('<input type="text">');
+		this.$list   = $('<ul class="es-list">');
+		this.utility = new EditableSelectUtility(this);
+		
+		if (['default', 'fade', 'slide'].indexOf(this.options.effects) < 0) this.options.effects = 'default';
+		if (isNaN(this.options.duration) || ['fast', 'slow'].indexOf(this.options.duration) < 0) this.options.duration = 'fast';
+		
+		// create text input
+		this.$select.replaceWith(this.$input);
+		this.$list.appendTo(this.options.appendTo || this.$input.parent());
+		
+		// initalization
+		this.utility.initialize();
+		this.utility.initializeList();
+		this.utility.initializeInput();
+		this.utility.trigger('create');
 	}
+	EditableSelect.DEFAULTS = { filter: true, effects: 'default', duration: 'fast' };
+	EditableSelect.prototype.filter = function () {
+		var hiddens = 0;
+		var search  = this.$input.val().toLowerCase().trim();
+		
+		this.$list.find('li').addClass('es-visible').show();
+		if (this.options.filter) {
+			hiddens = this.$list.find('li').filter(function (i, li) { return $(li).text().toLowerCase().indexOf(search) < 0; }).hide().removeClass('es-visible').size();
+			if (this.$list.find('li').size() == hiddens) this.hide();
+		}
+	};
+	EditableSelect.prototype.show = function () {
+		this.$list.css({
+			top: this.$input.position().top + this.$input.outerHeight() - 1,
+			left: this.$input.position().left,
+			width: this.$input.outerWidth()
+		});
+		
+		if (this.$list.is(':visible') || this.$list.find('li.es-visible').size() == 0) return;
+		
+		this.$input.addClass('open');
+		switch (this.options.effects) {
+			case 'fade':  this.$list.fadeIn(this.options.duration); break;
+			case 'slide': this.$list.slideDown(this.options.duration); break;
+			default:      this.$list.show(this.options.duration); break;
+		}
+		this.utility.trigger('show');
+	};
+	EditableSelect.prototype.hide = function () {
+		this.$input.removeClass('open');
+		switch (this.options.effects) {
+			case 'fade':  this.$list.fadeOut(this.options.duration); break;
+			case 'slide': this.$list.slideUp(this.options.duration); break;
+			default:      this.$list.hide(this.options.duration); break;
+		}
+		this.utility.trigger('hide');
+	};
+	EditableSelect.prototype.select = function ($li) {
+		if (!this.$list.has($li) || !$li.is('li.es-visible')) return;
+		this.$input.val($li.text());
+		this.hide();
+		this.utility.trigger('select', $li);
+	};
+	EditableSelect.prototype.add = function (text, index, attrs, data) {
+		var $li  = $('<li>').html(text);
+		var last = this.$list.find('li').size();
+		
+		if (isNaN(index)) index = last;
+		else index = Math.min(Math.max(0, index), last);
+		if (index == 0) this.$list.prepend($li);
+		else this.$list.find('li').eq(index - 1).after($li);
+		this.utility.setAttributes($li, attrs, data);
+	};
+	
+	// Utility
+	EditableSelectUtility = function (es) {
+		this.es = es;
+	}
+	EditableSelectUtility.prototype.initialize = function () {
+		var that = this;
+		that.setAttributes(that.es.$input, that.es.$select[0].attributes, that.es.$select.data());
+		that.es.$input.addClass('es-input').data('editable-select', that.es);
+		that.es.$select.find('option').each(function (i, option) {
+			var $option = $(option);
+			that.es.add($option.text(), i, option.attributes, $option.data());
+			if ($option.attr('selected')) that.es.$input.val($option.text());
+		});
+		that.es.filter();
+	};
+	EditableSelectUtility.prototype.initializeList = function () {
+		var that = this;
+		that.es.$list
+			.on('mousemove', 'li', function () {
+				that.es.$list.find('.selected').removeClass('selected');
+				$(this).addClass('selected');
+			})
+			.on('click', 'li', function () {
+				that.es.select($(this));
+			})
+			.on('mouseenter', function () {
+				that.es.$list.find('li.selected').removeClass('selected');
+			});
+	};
+	EditableSelectUtility.prototype.initializeInput = function () {
+		var that = this;
+		that.es.$input
+			.on('focus', $.proxy(that.es.show, that.es))
+			.on('blur', $.proxy(that.es.hide, that.es))
+			.on('input keydown', function (e) {
+				switch (e.keyCode) {
+					case 38: // Up
+						var visibles = that.es.$list.find('li.es-visible');
+						var selected = visibles.index(visibles.filter('li.selected'));
+						that.highlight(selected - 1);
+						break;
+					case 40: // Down
+						var visibles = that.es.$list.find('li.es-visible');
+						var selected = visibles.index(visibles.filter('li.selected'));
+						that.highlight(selected + 1);
+						break;
+					case 13: // Enter
+						if (that.es.$list.is(':visible')) {
+							that.es.select(that.es.$list.find('li.selected'));
+							e.preventDefault();
+						}
+					case 9:  // Tab
+					case 27: // Esc
+						that.es.hide();
+						break;
+					default:
+						that.es.filter();
+						that.highlight(0);
+						break;
+				}
+			});
+	};
+	EditableSelectUtility.prototype.highlight = function (index) {
+		var that = this;
+		that.es.show();
+		setTimeout(function () {
+			var visibles         = that.es.$list.find('li.es-visible');
+			var oldSelected      = that.es.$list.find('li.selected').removeClass('selected');
+			var oldSelectedIndex = visibles.index(oldSelected);
+			
+			if (visibles.size() > 0) {
+				var selectedIndex = (visibles.size() + index) % visibles.size();
+				var selected      = visibles.eq(selectedIndex);
+				var top           = selected.position().top;
+				
+				selected.addClass('selected');
+				if (selectedIndex < oldSelectedIndex && top < 0)
+					that.es.$list.scrollTop(that.es.$list.scrollTop() + top);
+				if (selectedIndex > oldSelectedIndex && top + selected.outerHeight() > that.es.$list.outerHeight())
+					that.es.$list.scrollTop(that.es.$list.scrollTop() + selected.outerHeight() + 2 * (top - that.es.$list.outerHeight()));
+			}
+		}, 100);
+	};
+	EditableSelectUtility.prototype.setAttributes = function ($element, attrs, data) {
+		$.each(attrs || {}, function (i, attr) { $element.attr(attr.name, attr.value); });
+		$element.data(data);
+	};
+	EditableSelectUtility.prototype.trigger = function (event) {
+		var params = Array.prototype.slice.call(arguments, 1);
+		var args   = [event + '.editable-select'];
+		args.push(params);
+		this.es.$select.trigger.apply(this.es.$select, args);
+		this.es.$input.trigger.apply(this.es.$input, args);
+	};
+	
+	// Plugin
+	Plugin = function (option) {
+		var args = Array.prototype.slice.call(arguments, 1);
+		return this.each(function () {
+			var $this   = $(this);
+			var data    = $this.data('editable-select');
+			var options = $.extend({}, EditableSelect.DEFAULTS, $this.data(), typeof option == 'object' && option);
+			
+			if (!data) data = new EditableSelect(this, options);
+			if (typeof option == 'string') data[option].apply(data, args);
+		});
+	}
+	$.fn.editableSelect             = Plugin;
+	$.fn.editableSelect.Constructor = EditableSelect;
+	
 }) (jQuery);

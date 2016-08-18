@@ -25,6 +25,6 @@
     "bower_components"
   ],
   "dependencies": {
-    "jquery": "^1.1.1"
+    "jquery": ">=1.1.1 <3.0.0"
   }
 }

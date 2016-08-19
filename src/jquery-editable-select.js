@@ -82,6 +82,15 @@
 		else this.$list.find('li').eq(index - 1).after($li);
 		this.utility.setAttributes($li, attrs, data);
 	};
+	EditableSelect.prototype.remove = function (index) {
+		var last = this.$list.find('li').length;
+		
+		if (isNaN(index)) index = last;
+		else index = Math.min(Math.max(0, index), last - 1);
+		this.$list.find('li').eq(index).remove();
+		this.$select.find('option').eq(index).remove();
+		this.filter();
+	};
 	
 	// Utility
 	EditableSelectUtility = function (es) {

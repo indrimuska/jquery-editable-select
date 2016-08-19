@@ -141,6 +141,10 @@ Manually sets the value of the text field to the value of the `$element` passed 
 
 Adds a new option in the dropdown list. You can choose the position where to insert the element (starting from `0`) and any attributes (or data-attributes) to be assigned.
 
+### `.editableSelect('remove', index);`
+
+Removes an option in the dropdown list at the given index.
+
 ## Events
 
 Event | Parameters | Description

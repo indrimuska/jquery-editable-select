@@ -12,7 +12,7 @@
 		
 		this.options = options;
 		this.$select = $(select);
-		this.$input  = $('<input type="text">');
+		this.$input  = $('<input type="text" autocomplete="off">');
 		this.$list   = $('<ul class="es-list">');
 		this.utility = new EditableSelectUtility(this);
 		
@@ -36,8 +36,8 @@
 		
 		this.$list.find('li').addClass('es-visible').show();
 		if (this.options.filter) {
-			hiddens = this.$list.find('li').filter(function (i, li) { return $(li).text().toLowerCase().indexOf(search) < 0; }).hide().removeClass('es-visible').size();
-			if (this.$list.find('li').size() == hiddens) this.hide();
+			hiddens = this.$list.find('li').filter(function (i, li) { return $(li).text().toLowerCase().indexOf(search) < 0; }).hide().removeClass('es-visible').length;
+			if (this.$list.find('li').length == hiddens) this.hide();
 		}
 	};
 	EditableSelect.prototype.show = function () {
@@ -47,7 +47,7 @@
 			width: this.$input.outerWidth()
 		});
 		
-		if (this.$list.is(':visible') || this.$list.find('li.es-visible').size() == 0) return;
+		if (this.$list.is(':visible') || this.$list.find('li.es-visible').length == 0) return;
 		
 		this.$input.addClass('open');
 		switch (this.options.effects) {
@@ -74,7 +74,7 @@
 	};
 	EditableSelect.prototype.add = function (text, index, attrs, data) {
 		var $li  = $('<li>').html(text);
-		var last = this.$list.find('li').size();
+		var last = this.$list.find('li').length;
 		
 		if (isNaN(index)) index = last;
 		else index = Math.min(Math.max(0, index), last);
@@ -153,8 +153,8 @@
 			var oldSelected      = that.es.$list.find('li.selected').removeClass('selected');
 			var oldSelectedIndex = visibles.index(oldSelected);
 			
-			if (visibles.size() > 0) {
-				var selectedIndex = (visibles.size() + index) % visibles.size();
+			if (visibles.length > 0) {
+				var selectedIndex = (visibles.length + index) % visibles.length;
 				var selected      = visibles.eq(selectedIndex);
 				var top           = selected.position().top;
 				

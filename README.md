@@ -145,6 +145,10 @@ Adds a new option in the dropdown list. You can choose the position where to ins
 
 Removes an option in the dropdown list at the given index.
 
+### `.editableSelect('destroy');`
+
+Destroys the typeahead field and restores the `<select>` input.
+
 ## Events
 
 Event | Parameters | Description

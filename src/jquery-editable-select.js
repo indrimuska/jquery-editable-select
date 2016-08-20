@@ -73,14 +73,22 @@
 		this.utility.trigger('select', $li);
 	};
 	EditableSelect.prototype.add = function (text, index, attrs, data) {
-		var $li  = $('<li>').html(text);
-		var last = this.$list.find('li').length;
+		var $li     = $('<li>').html(text);
+		var $option = $('<option>').text(text);
+		var last    = this.$list.find('li').length;
 		
 		if (isNaN(index)) index = last;
 		else index = Math.min(Math.max(0, index), last);
-		if (index == 0) this.$list.prepend($li);
-		else this.$list.find('li').eq(index - 1).after($li);
+		if (index == 0) {
+		  this.$list.prepend($li);
+		  this.$select.prepend($option);
+		} else {
+		  this.$list.find('li').eq(index - 1).after($li);
+		  this.$select.find('option').eq(index - 1).after($option);
+		}
 		this.utility.setAttributes($li, attrs, data);
+		this.utility.setAttributes($option, attrs, data);
+		this.filter();
 	};
 	EditableSelect.prototype.remove = function (index) {
 		var last = this.$list.find('li').length;
@@ -90,6 +98,13 @@
 		this.$list.find('li').eq(index).remove();
 		this.$select.find('option').eq(index).remove();
 		this.filter();
+	};
+	EditableSelect.prototype.destroy = function () {
+		this.$list.off('mousemove click mouseenter');
+		this.$input.off('focus blur input keydown');
+		this.$input.replaceWith(this.$select);
+		this.$list.remove();
+		this.$select.removeData('editable-select');
 	};
 	
 	// Utility
@@ -101,7 +116,7 @@
 		that.setAttributes(that.es.$input, that.es.$select[0].attributes, that.es.$select.data());
 		that.es.$input.addClass('es-input').data('editable-select', that.es);
 		that.es.$select.find('option').each(function (i, option) {
-			var $option = $(option);
+			var $option = $(option).remove();
 			that.es.add($option.text(), i, option.attributes, $option.data());
 			if ($option.attr('selected')) that.es.$input.val($option.text());
 		});

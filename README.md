@@ -151,15 +151,17 @@ Destroys the typeahead field and restores the `<select>` input.
 
 ## Events
 
-Event | Parameters | Description
----|:---:|---
-create.editable-select | | Fired after input initialization.
-show.editable-select | | Fired when the list is shown.
-hide.editable-select | | Fired when the list is hidden.
-select.editable-select | `$element` | Fired when an option of the list is selected.
+Event | Description
+---|---
+created.editable-select | Fired after initialization.
+show.editable-select | Fired immediately when the `show` instance method has been called.
+shown.editable-select | Fired when the dropdown has been made visible (will wait for CSS transitions to complete).
+hide.editable-select | Fired immediately when the `hide` instance method has been called.
+hidden.editable-select | Fired when the dropdown has finished being hidden (will wait for CSS transitions to complete).
+select.editable-select | Fired when an option of the list has been selected. The selected `$element` is available as property of the event.
 
 ```javascript
-$('#editable-select').on('show.editable-select', function (e) {
+$('#editable-select').on('shown.editable-select', function (e) {
 	// do something...
 });
 ```

@@ -27,7 +27,7 @@
 		this.utility.initialize();
 		this.utility.initializeList();
 		this.utility.initializeInput();
-		this.utility.trigger('create');
+		this.utility.trigger('created');
 	}
 	EditableSelect.DEFAULTS = { filter: true, effects: 'default', duration: 'fast' };
 	EditableSelect.prototype.filter = function () {
@@ -42,34 +42,33 @@
 	};
 	EditableSelect.prototype.show = function () {
 		this.$list.css({
-			top: this.$input.position().top + this.$input.outerHeight() - 1,
-			left: this.$input.position().left,
+			top:   this.$input.position().top + this.$input.outerHeight() - 1,
+			left:  this.$input.position().left,
 			width: this.$input.outerWidth()
 		});
 		
-		if (this.$list.is(':visible') || this.$list.find('li.es-visible').length == 0) return;
-		
-		this.$input.addClass('open');
-		switch (this.options.effects) {
-			case 'fade':  this.$list.fadeIn(this.options.duration); break;
-			case 'slide': this.$list.slideDown(this.options.duration); break;
-			default:      this.$list.show(this.options.duration); break;
+		if (!this.$list.is(':visible') && this.$list.find('li.es-visible').length > 0) {
+			var fns = { default: 'show', fade: 'fadeIn', slide: 'slideDown' };
+			var fn  = fns[this.options.effects];
+			
+			this.utility.trigger('show');
+			this.$input.addClass('open');
+			this.$list[fn](this.options.duration, $.proxy(this.utility.trigger, this.utility, 'shown'));
 		}
-		this.utility.trigger('show');
 	};
 	EditableSelect.prototype.hide = function () {
-		this.$input.removeClass('open');
-		switch (this.options.effects) {
-			case 'fade':  this.$list.fadeOut(this.options.duration); break;
-			case 'slide': this.$list.slideUp(this.options.duration); break;
-			default:      this.$list.hide(this.options.duration); break;
-		}
+		var fns = { default: 'hide', fade: 'fadeOut', slide: 'slideUp' };
+		var fn  = fns[this.options.effects];
+		
 		this.utility.trigger('hide');
+		this.$input.removeClass('open');
+		this.$list[fn](this.options.duration, $.proxy(this.utility.trigger, this.utility, 'hidden'));
 	};
 	EditableSelect.prototype.select = function ($li) {
 		if (!this.$list.has($li) || !$li.is('li.es-visible')) return;
 		this.$input.val($li.text());
 		this.hide();
+		this.filter();
 		this.utility.trigger('select', $li);
 	};
 	EditableSelect.prototype.add = function (text, index, attrs, data) {
@@ -145,12 +144,12 @@
 				switch (e.keyCode) {
 					case 38: // Up
 						var visibles = that.es.$list.find('li.es-visible');
-						var selected = visibles.index(visibles.filter('li.selected'));
+						var selected = visibles.index(visibles.filter('li.selected')) || 0;
 						that.highlight(selected - 1);
 						break;
 					case 40: // Down
 						var visibles = that.es.$list.find('li.es-visible');
-						var selected = visibles.index(visibles.filter('li.selected'));
+						var selected = visibles.index(visibles.filter('li.selected')) || 0;
 						that.highlight(selected + 1);
 						break;
 					case 13: // Enter
@@ -188,7 +187,7 @@
 				if (selectedIndex > oldSelectedIndex && top + selected.outerHeight() > that.es.$list.outerHeight())
 					that.es.$list.scrollTop(that.es.$list.scrollTop() + selected.outerHeight() + 2 * (top - that.es.$list.outerHeight()));
 			}
-		}, 100);
+		});
 	};
 	EditableSelectUtility.prototype.setAttributes = function ($element, attrs, data) {
 		$.each(attrs || {}, function (i, attr) { $element.attr(attr.name, attr.value); });
@@ -217,4 +216,4 @@
 	$.fn.editableSelect             = Plugin;
 	$.fn.editableSelect.Constructor = EditableSelect;
 	
-}) (jQuery);
+})(jQuery);

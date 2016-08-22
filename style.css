@@ -3,3 +3,5 @@ body { margin-top: 30px; margin-bottom: 100px; max-width: 1040px; }
 h3 { margin-bottom: 20px; }
 .form-control { max-width: 300px; }
 .modal-body .es-input { max-width: inherit; }
+pre { padding: 0; border: 0; }
+pre>code { border-radius: 4px; padding: 12px 15px !important; box-shadow: inset 0 0 10px rgba(0,136,204,0.3); }

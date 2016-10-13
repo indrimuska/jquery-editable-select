@@ -16,6 +16,7 @@
 		this.$list   = $('<ul class="es-list">');
 		this.utility = new EditableSelectUtility(this);
 		
+		if (['focus', 'manual'].indexOf(this.options.trigger) < 0) this.options.trigger = 'focus';
 		if (['default', 'fade', 'slide'].indexOf(this.options.effects) < 0) this.options.effects = 'default';
 		if (isNaN(this.options.duration) || ['fast', 'slow'].indexOf(this.options.duration) < 0) this.options.duration = 'fast';
 		
@@ -29,7 +30,7 @@
 		this.utility.initializeInput();
 		this.utility.trigger('created');
 	}
-	EditableSelect.DEFAULTS = { filter: true, effects: 'default', duration: 'fast' };
+	EditableSelect.DEFAULTS = { filter: true, effects: 'default', duration: 'fast', trigger: 'focus' };
 	EditableSelect.prototype.filter = function () {
 		var hiddens = 0;
 		var search  = this.$input.val().toLowerCase().trim();
@@ -99,7 +100,7 @@
 		this.filter();
 	};
 	EditableSelect.prototype.destroy = function () {
-		this.$list.off('mousemove click mouseenter');
+		this.$list.off('mousemove mousedown mouseup');
 		this.$input.off('focus blur input keydown');
 		this.$input.replaceWith(this.$select);
 		this.$list.remove();
@@ -128,45 +129,54 @@
 				that.es.$list.find('.selected').removeClass('selected');
 				$(this).addClass('selected');
 			})
-			.on('click', 'li', function () {
+			.on('mousedown', 'li', function () {
 				that.es.select($(this));
 			})
-			.on('mouseenter', function () {
+			.on('mouseup', function () {
 				that.es.$list.find('li.selected').removeClass('selected');
 			});
 	};
 	EditableSelectUtility.prototype.initializeInput = function () {
 		var that = this;
-		that.es.$input
-			.on('focus', $.proxy(that.es.show, that.es))
-			.on('blur', $.proxy(that.es.hide, that.es))
-			.on('input keydown', function (e) {
-				switch (e.keyCode) {
-					case 38: // Up
-						var visibles = that.es.$list.find('li.es-visible');
-						var selected = visibles.index(visibles.filter('li.selected')) || 0;
-						that.highlight(selected - 1);
-						break;
-					case 40: // Down
-						var visibles = that.es.$list.find('li.es-visible');
-						var selected = visibles.index(visibles.filter('li.selected')) || 0;
-						that.highlight(selected + 1);
-						break;
-					case 13: // Enter
-						if (that.es.$list.is(':visible')) {
-							that.es.select(that.es.$list.find('li.selected'));
-							e.preventDefault();
-						}
-					case 9:  // Tab
-					case 27: // Esc
-						that.es.hide();
-						break;
-					default:
-						that.es.filter();
-						that.highlight(0);
-						break;
-				}
-			});
+		switch (this.es.options.trigger) {
+			default:
+			case 'focus':
+				that.es.$input
+					.on('focus', $.proxy(that.es.show, that.es))
+					.on('blur', $.proxy(that.es.hide, that.es));
+				break;
+			case 'manual':
+				break;
+		}
+		that.es.$input.on('input keydown', function (e) {
+			switch (e.keyCode) {
+				case 38: // Up
+					var visibles = that.es.$list.find('li.es-visible');
+					var selected = visibles.index(visibles.filter('li.selected')) || 0;
+					that.highlight(selected - 1);
+					e.preventDefault();
+					break;
+				case 40: // Down
+					var visibles = that.es.$list.find('li.es-visible');
+					var selected = visibles.index(visibles.filter('li.selected')) || 0;
+					that.highlight(selected + 1);
+					e.preventDefault();
+					break;
+				case 13: // Enter
+					if (that.es.$list.is(':visible')) {
+						that.es.select(that.es.$list.find('li.selected'));
+						e.preventDefault();
+					}
+				case 9:  // Tab
+				case 27: // Esc
+					that.es.hide();
+					break;
+				default:
+					that.es.filter();
+					that.highlight(0);
+					break;
+			}
+		});
 	};
 	EditableSelectUtility.prototype.highlight = function (index) {
 		var that = this;

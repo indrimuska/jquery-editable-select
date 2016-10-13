@@ -97,6 +97,7 @@ filter | Boolean | `true` | Filter (or not) items in list while typing.
 effects | Enum: `"default"`, `"slide"`, `"fade"` | `"default"` | Easing used for showing and hiding the dropdown list.
 duration | Integer or Enum: `"fast"`, `"slow"` | `"fast"` | Duration of the easings (in milliseconds).
 appendTo | String or jQuery element | `select.parent()` | Where to append the dropdown list in the DOM.
+trigger | Enum: `"focus"`, `"manual"` | `"focus"` | How dropdown list is triggered.
 
 ```javascript
 $('#editable-select').editableSelect({

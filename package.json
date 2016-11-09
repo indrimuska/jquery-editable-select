@@ -1,6 +1,6 @@
 {
   "name": "jquery-editable-select",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "A simple jQuery Plugin that converts a select into an text field with suggestions.",
   "main": "dist/jquery-editable-select.min.js",
   "repository": {

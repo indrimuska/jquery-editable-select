@@ -13,3 +13,4 @@ input.es-input.open {
 	-moz-box-shadow: 0 2px 3px #ccc; -webkit-box-shadow: 0 2px 3px #ccc; box-shadow: 0 2px 3px #ccc; }
 .es-list li { display: block; padding: 5px 10px; margin: 0; }
 .es-list li.selected { background: #f3f3f3; }
+.es-list li[disabled] { opacity: .5; }

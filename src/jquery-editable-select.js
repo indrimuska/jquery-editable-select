@@ -66,7 +66,7 @@
 		this.$list[fn](this.options.duration, $.proxy(this.utility.trigger, this.utility, 'hidden'));
 	};
 	EditableSelect.prototype.select = function ($li) {
-		if (!this.$list.has($li) || !$li.is('li.es-visible')) return;
+		if (!this.$list.has($li) || !$li.is('li.es-visible:not([disabled])')) return;
 		this.$input.val($li.text());
 		this.hide();
 		this.filter();
@@ -125,12 +125,13 @@
 	EditableSelectUtility.prototype.initializeList = function () {
 		var that = this;
 		that.es.$list
-			.on('mousemove', 'li', function () {
+			.on('mousemove', 'li:not([disabled])', function () {
 				that.es.$list.find('.selected').removeClass('selected');
 				$(this).addClass('selected');
 			})
-			.on('mousedown', 'li', function () {
-				that.es.select($(this));
+			.on('mousedown', 'li', function (e) {
+				if ($(this).is('[disabled]')) e.preventDefault();
+				else that.es.select($(this));
 			})
 			.on('mouseup', function () {
 				that.es.$list.find('li.selected').removeClass('selected');
@@ -151,15 +152,17 @@
 		that.es.$input.on('input keydown', function (e) {
 			switch (e.keyCode) {
 				case 38: // Up
-					var visibles = that.es.$list.find('li.es-visible');
-					var selected = visibles.index(visibles.filter('li.selected')) || 0;
-					that.highlight(selected - 1);
+					var visibles = that.es.$list.find('li.es-visible:not([disabled])');
+					var nextNode = visibles.filter('li.selected').prev();
+					var nextIndex = visibles.index(nextElement.length > 0 ? nextElement : visibles.last());
+					that.highlight(nextIndex);
 					e.preventDefault();
 					break;
 				case 40: // Down
-					var visibles = that.es.$list.find('li.es-visible');
-					var selected = visibles.index(visibles.filter('li.selected')) || 0;
-					that.highlight(selected + 1);
+					var visibles = that.es.$list.find('li.es-visible:not([disabled])');
+					var nextNode = visibles.filter('li.selected').next();
+					var nextIndex = visibles.index(nextNode.length > 0 ? nextNode : visibles.first());
+					that.highlight(nextIndex);
 					e.preventDefault();
 					break;
 				case 13: // Enter

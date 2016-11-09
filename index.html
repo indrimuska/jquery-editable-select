@@ -200,7 +200,7 @@ $('#fade').editableSelect({ effects: 'fade' });</code></pre>
 				<h4>Result</h4>
 				<select id="test" class="form-control">
 					<option>One</option>
-					<option>Two</option>
+					<option disabled>Two</option>
 					<option>Three</option>
 				</select>
 			</div>
@@ -300,7 +300,7 @@ $('#fade').editableSelect({ effects: 'fade' });</code></pre>
 				});
 				$('#methods button').on('click', function () {
 					var action =  $(this).attr('id') || {
-						filter:   $('[name=filter]:checked:first').val() == 'true',
+						$('#filter').val() === 'True',
 						effects:  $('#effects').val(),
 						duration: $('#duration').val()
 					};

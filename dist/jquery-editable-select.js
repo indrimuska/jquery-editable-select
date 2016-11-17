@@ -154,7 +154,7 @@
 				case 38: // Up
 					var visibles = that.es.$list.find('li.es-visible:not([disabled])');
 					var nextNode = visibles.filter('li.selected').prev();
-					var nextIndex = visibles.index(nextElement.length > 0 ? nextElement : visibles.last());
+					var nextIndex = visibles.index(nextNode.length > 0 ? nextNode : visibles.last());
 					that.highlight(nextIndex);
 					e.preventDefault();
 					break;

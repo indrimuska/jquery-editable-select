@@ -300,7 +300,7 @@ $('#fade').editableSelect({ effects: 'fade' });</code></pre>
 				});
 				$('#methods button').on('click', function () {
 					var action =  $(this).attr('id') || {
-						$('#filter').val() === 'True',
+						filter:   $('#filter').val() === 'True',
 						effects:  $('#effects').val(),
 						duration: $('#duration').val()
 					};

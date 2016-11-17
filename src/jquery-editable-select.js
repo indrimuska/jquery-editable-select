@@ -68,7 +68,7 @@
 	EditableSelect.prototype.select = function ($li) {
 		if (!this.$list.has($li) || !$li.is('li.es-visible:not([disabled])')) return;
 		this.$input.val($li.text());
-		this.hide();
+		if (this.options.filter) this.hide();
 		this.filter();
 		this.utility.trigger('select', $li);
 	};
@@ -170,6 +170,7 @@
 						that.es.select(that.es.$list.find('li.selected'));
 						e.preventDefault();
 					}
+					break;
 				case 9:  // Tab
 				case 27: // Esc
 					that.es.hide();

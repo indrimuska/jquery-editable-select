@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/indrimuska/jquery-editable-select",
   "dependencies": {
-    "jquery": ">=1.1.1 <3.0.0"
+    "jquery": ">=1.1.1"
   },
   "devDependencies": {
     "grunt": "^0.4.5",

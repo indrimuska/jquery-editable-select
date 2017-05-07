@@ -103,7 +103,7 @@
 		this.$list.find('li').remove();
 		this.$select.find('option').remove();
 		this.filter();
-    };
+	};
 	EditableSelect.prototype.destroy = function () {
 		this.$list.off('mousemove mousedown mouseup');
 		this.$input.off('focus blur input keydown');

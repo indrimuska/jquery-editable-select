@@ -158,16 +158,14 @@
 			switch (e.keyCode) {
 				case 38: // Up
 					var visibles = that.es.$list.find('li.es-visible:not([disabled])');
-					var nextNode = visibles.filter('li.selected').prev();
-					var nextIndex = visibles.index(nextNode.length > 0 ? nextNode : visibles.last());
-					that.highlight(nextIndex);
+					var selectedIndex = visibles.index(visibles.filter('li.selected'));
+					that.highlight(selectedIndex - 1);
 					e.preventDefault();
 					break;
 				case 40: // Down
 					var visibles = that.es.$list.find('li.es-visible:not([disabled])');
-					var nextNode = visibles.filter('li.selected').next();
-					var nextIndex = visibles.index(nextNode.length > 0 ? nextNode : visibles.first());
-					that.highlight(nextIndex);
+					var selectedIndex = visibles.index(visibles.filter('li.selected'));
+					that.highlight(selectedIndex + 1);
 					e.preventDefault();
 					break;
 				case 13: // Enter

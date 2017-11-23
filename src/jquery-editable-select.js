@@ -6,6 +6,10 @@
  */
 
 +(function ($) {
+	HtmlEntities = function (str) {
+		return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+	}
+
 	// jQuery Editable Select
 	EditableSelect = function (select, options) {
 		var that     = this;
@@ -122,7 +126,7 @@
 		that.es.$input.addClass('es-input').data('editable-select', that.es);
 		that.es.$select.find('option').each(function (i, option) {
 			var $option = $(option).remove();
-			that.es.add($option.text(), i, option.attributes, $option.data());
+			that.es.add(HtmlEntities($option.text()), i, option.attributes, $option.data());
 			if ($option.attr('selected')) that.es.$input.val($option.text());
 		});
 		that.es.filter();

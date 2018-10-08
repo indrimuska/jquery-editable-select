@@ -16,9 +16,9 @@
 		this.$list   = $('<ul class="es-list">');
 		this.utility = new EditableSelectUtility(this);
 		
-		if (['focus', 'manual'].indexOf(this.options.trigger) < 0) this.options.trigger = 'focus';
-		if (['default', 'fade', 'slide'].indexOf(this.options.effects) < 0) this.options.effects = 'default';
-		if (isNaN(this.options.duration) && ['fast', 'slow'].indexOf(this.options.duration) < 0) this.options.duration = 'fast';
+		if ($.inArray(this.options.trigger,['focus', 'manual']) < 0) this.options.trigger = 'focus';
+		if ($.inArray(this.options.effects,['default', 'fade', 'slide']) < 0) this.options.effects = 'default';
+		if (isNaN(this.options.duration) && $.inArray(this.options.duration,['fast', 'slow']) < 0) this.options.duration = 'fast';
 		
 		// create text input
 		this.$select.replaceWith(this.$input);

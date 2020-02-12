@@ -27,6 +27,12 @@ bower install jquery-editable-select
   git clone   https://github.com/indrimuska/jquery-editable-select.git
 ```
 
+Typings are available in the @types/jquery-editable-select package:
+
+```
+  npm install --save-dev @types/jquery-editable-select
+```
+
 Include style and script in your page:
 
 ```html

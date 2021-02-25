@@ -148,7 +148,10 @@
 			default:
 			case 'focus':
 				that.es.$input
-					.on('focus', $.proxy(that.es.show, that.es))
+					.on('focus', $.proxy(function(){
+                				this.$list.find('li').addClass('es-visible').show();
+                				that.es.show()}, that.es
+					))
 					.on('blur', $.proxy(that.es.hide, that.es));
 				break;
 			case 'manual':

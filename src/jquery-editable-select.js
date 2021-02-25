@@ -149,7 +149,14 @@
 			case 'focus':
 				that.es.$input
 					.on('focus', $.proxy(that.es.show, that.es))
-					.on('blur', $.proxy(that.es.hide, that.es));
+				        .on("blur", $.proxy(function() {
+						if ($(".es-list:hover").length === 0) {
+							that.es.hide();
+						} else {
+							this.$input.focus();
+						}
+					}, that.es
+				    ));
 				break;
 			case 'manual':
 				break;

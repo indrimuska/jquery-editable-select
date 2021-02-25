@@ -177,6 +177,12 @@ $('#editable-select').on('shown.editable-select', function (e) {
 });
 ```
 
+```javascript
+$('#editable-select').on('select.editable-select', function (e, li) {
+	// get the last selected (li)
+});
+```
+
 ## Keyboard support
 
 jQuery Editable Select includes support for keyboard navigation:

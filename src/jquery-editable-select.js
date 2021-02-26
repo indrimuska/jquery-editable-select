@@ -119,6 +119,8 @@
 	EditableSelectUtility.prototype.initialize = function () {
 		var that = this;
 		that.setAttributes(that.es.$input, that.es.$select[0].attributes, that.es.$select.data());
+		var placeholder = that.es.$select.data('placeholder');
+		if (placeholder) that.es.$input.attr('placeholder', placeholder);
 		that.es.$input.addClass('es-input').data('editable-select', that.es);
 		that.es.$select.find('option').each(function (i, option) {
 			var $option = $(option).remove();

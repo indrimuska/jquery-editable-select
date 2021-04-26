@@ -21,6 +21,13 @@
 		if (isNaN(this.options.duration) && ['fast', 'slow'].indexOf(this.options.duration) < 0) this.options.duration = 'fast';
 		
 		// create text input
+		var events = $._data(select, "events");
+		if (events) {
+			Object.keys(events).forEach(key => {
+				var event = events[key][0];
+				this.$input.bind(event.type + "." + event.namespace, event.handler);
+			});
+		}
 		this.$select.replaceWith(this.$input);
 		this.$list.appendTo(this.options.appendTo || this.$input.parent());
 		

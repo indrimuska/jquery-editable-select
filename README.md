@@ -172,9 +172,10 @@ hidden.editable-select | Fired when the dropdown has finished being hidden (will
 select.editable-select | Fired when an option of the list has been selected. The selected `$element` is available as property of the event.
 
 ```javascript
+// Must add event handlers before initializing jQuery Editable Select.
 $('#editable-select').on('shown.editable-select', function (e) {
 	// do something...
-});
+}).editableSelect();
 ```
 
 ## Keyboard support

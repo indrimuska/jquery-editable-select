@@ -5,7 +5,7 @@
  * Source on GitHub @ https://github.com/indrimuska/jquery-editable-select
  */
 
-+(function ($) {
+ +(function ($) {
 	// jQuery Editable Select
 	EditableSelect = function (select, options) {
 		var that     = this;
@@ -21,6 +21,13 @@
 		if (isNaN(this.options.duration) && ['fast', 'slow'].indexOf(this.options.duration) < 0) this.options.duration = 'fast';
 		
 		// create text input
+		var events = $._data(select, "events");
+		if (events) {
+			Object.keys(events).forEach(key => {
+				var event = events[key][0];
+				this.$input.bind(event.type + "." + event.namespace, event.handler);
+			});
+		}
 		this.$select.replaceWith(this.$input);
 		this.$list.appendTo(this.options.appendTo || this.$input.parent());
 		
@@ -149,7 +156,14 @@
 			case 'focus':
 				that.es.$input
 					.on('focus', $.proxy(that.es.show, that.es))
-					.on('blur', $.proxy(that.es.hide, that.es));
+				        .on("blur", $.proxy(function() {
+						if ($(".es-list:hover").length === 0) {
+							that.es.hide();
+						} else {
+							this.$input.focus();
+						}
+					}, that.es
+				    ));
 				break;
 			case 'manual':
 				break;

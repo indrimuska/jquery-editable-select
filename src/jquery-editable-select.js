@@ -14,6 +14,8 @@
 		this.$select = $(select);
 		this.$input  = $('<input type="text" autocomplete="off">');
 		this.$list   = $('<ul class="es-list">');
+		// save size of populated select element (additional 20px for the "dropdown" image)
+		this.$width  = this.$select.outerWidth() + 20;		
 		this.utility = new EditableSelectUtility(this);
 		
 		if (['focus', 'manual'].indexOf(this.options.trigger) < 0) this.options.trigger = 'focus';
@@ -29,6 +31,8 @@
 			});
 		}
 		this.$select.replaceWith(this.$input);
+		// set size of input element (2px to align borders)
+		this.$input.css({ width: this.$width + 2});		
 		this.$list.appendTo(this.options.appendTo || this.$input.parent());
 		
 		// initalization
@@ -52,7 +56,8 @@
 		this.$list.css({
 			top:   this.$input.position().top + this.$input.outerHeight() - 1,
 			left:  this.$input.position().left,
-			width: this.$input.outerWidth()
+			// set width to previously stored value
+			width: this.$width
 		});
 		
 		if (!this.$list.is(':visible') && this.$list.find('li.es-visible').length > 0) {

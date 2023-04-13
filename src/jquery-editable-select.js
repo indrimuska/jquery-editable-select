@@ -74,7 +74,7 @@
 	};
 	EditableSelect.prototype.select = function ($li) {
 		if (!this.$list.has($li) || !$li.is('li.es-visible:not([disabled])')) return;
-		this.$input.val($li.attr('value'));
+		this.$input.val($li.text());
 		if (this.options.filter) this.hide();
 		this.filter();
 		this.utility.trigger('select', $li);
@@ -130,7 +130,7 @@
 		that.es.$select.find('option').each(function (i, option) {
 			var $option = $(option).remove();
 			that.es.add($option.text(), i, option.attributes, $option.data());
-			if ($option.attr('selected')) that.es.$input.val($option.attr('value'));
+			if ($option.attr('selected')) that.es.$input.val($option.text());
 		});
 		that.es.filter();
 	};

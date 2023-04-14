@@ -144,6 +144,10 @@ Manually filters the dropdown list according to the value of the text field.
 
 Manually sets the value of the text field to the value of the `$element` passed as parameter (it must be one of the elements in the dropdown list).
 
+### `.editableSelect('placeholder');`
+
+Sometimes we need to reset the select value, just use the method.
+
 ### `.editableSelect('add', text [, index [, attrs [, data ]]] );`
 
 Adds a new option in the dropdown list. You can choose the position where to insert the element (starting from `0`) and any attributes (or data-attributes) to be assigned.
@@ -185,14 +189,14 @@ jQuery Editable Select includes support for keyboard navigation:
 -	<kbd>up</kbd>, <kbd>down</kbd> arrow keys<br>
 	You can navigate through list with keyboard arrows.
 
--	<kbd>Enter</kbd><br>
+		<kbd>Enter</kbd><br>
 	When the list is visible, by pressing <kbd>Enter</kbd> button you'll select the highlighted option and replace the input field value with the option label.<br>
 	When the list is not visible, <kbd>Enter</kbd> will have a normal behavior (submitting the form, etc...)
 
--	<kbd>Tab</kbd><br>
+		<kbd>Tab</kbd><br>
 	If the dropdown list is visible, it closes the dropdown, otherwise it will be opened.
 
--	<kbd>Escape</kbd><br>
+		<kbd>Escape</kbd><br>
 	Hides the list.
 
 # License

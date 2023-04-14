@@ -79,6 +79,11 @@
 		this.filter();
 		this.utility.trigger('select', $li);
 	};
+	EditableSelect.prototype.placeholder = function () {
+		this.$input.val("");
+		this.filter();
+		this.utility.trigger("hide", "");
+    },
 	EditableSelect.prototype.add = function (text, index, attrs, data) {
 		var $li     = $('<li>').html(text);
 		var $option = $('<option>').text(text);

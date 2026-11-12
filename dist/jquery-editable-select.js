@@ -142,7 +142,7 @@
 				$(this).addClass('selected');
 			})
 			.on('mousedown', 'li', function (e) {
-				if ($(this).is('[disabled]')) e.preventDefault();
+				if (that.es.$input.is(':disabled') || $(this).is('[disabled]')) e.preventDefault();
 				else that.es.select($(this));
 			})
 			.on('mouseup', function () {
